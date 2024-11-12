@@ -7,7 +7,7 @@ header {
      background-color: #0A2540;
 }
 
-.header-top {
+.wrapper {
      width: 80%;
      margin: auto;
      display: flex;
@@ -95,5 +95,9 @@ header {
 .header-bottom a:hover {
      color: #1b70c6;
      text-decoration: none;
+}
+nav{
+     width: 100%;
+     display: flex;
 }
 
