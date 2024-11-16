@@ -1,0 +1,46 @@
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}   
+
+*{
+    margin: 0;
+}
+
+body{
+    font-family: 'Assistant', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+    font-family: 'Assistant';
+    src: url('../assets/fonts/Assistant-Bold.woff2') format('woff2'),
+        url('../assets/fonts/Assistant-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Assistant';
+    src: url('../assets/fonts/Assistant-Regular.woff2') format('woff2'),
+        url('../assets/fonts/Assistant-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Assistant';
+    src: url('../assets/fonts/Assistant-Medium.woff2') format('woff2'),
+        url('../assets/fonts/Assistant-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face{
+    font-family: 'Assistant';
+    src: url('../assets/fonts/Assistant-Light.woff2') format('woff2'),
+    url('../assets/fonts/Assistant-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
