@@ -1,16 +1,71 @@
-
-*, *::before, *::after {
+/*Resetting the default styles */
+*,
+*::before,
+*::after {
     box-sizing: border-box;
-}   
+}
 
-*{
+* {
     margin: 0;
 }
 
-body{
+body {
     font-family: 'Assistant', sans-serif;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    background-color: var(--bg-default);
+    color: var(--text-primary);
+}
+
+input,
+button,
+label {
+    font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+    line-height: 1.2;
+}
+
+p {
+    text-wrap: pretty;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+}
+
+img,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
 }
 
 @font-face {
@@ -36,11 +91,108 @@ body{
     font-weight: 500;
     font-style: normal;
 }
-@font-face{
+
+@font-face {
     font-family: 'Assistant';
     src: url('../assets/fonts/Assistant-Light.woff2') format('woff2'),
-    url('../assets/fonts/Assistant-Light.woff') format('woff');
+        url('../assets/fonts/Assistant-Light.woff') format('woff');
     font-weight: 300;
     font-style: normal;
 }
 
+:root {
+    --bg-primary: #1b294e;
+    --bg-secondary: #d2ecfb;
+    --bg-default: #fff;
+    --btn-primary: #1da1f3;
+    --btn-secondary: #e8f7fe;
+    --link-navigation: #1b294e;
+    --link-view-all: #35a8f1;
+    --link-view-all-hover: #2f86bc;
+    --text-primary: #0f0f0f;
+    --text-secondary: #fff;
+    --text-author: #8e8e8e;
+    --section-name-fsize: 2rem;
+    --view-all-fsize: 1.5rem;
+    --btn-fsize: 1rem;
+    --book-tittle-fsize: 1.25rem;
+    --author-fsize: 1rem;
+    --price-fsize: 1.1rem;
+}
+
+section {
+    width: 100%;
+    height: 100dvh;
+}
+
+.wrapper {
+    width: 85%;
+    margin: auto;
+}
+
+h3 {
+    font-size: var(--section-name-fsize);
+}
+
+section a {
+    font-size: var(--view-all-fsize);
+    color: var(--link-view-all);
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+section a:hover {
+    color: var(--link-view-all-hover);
+    text-shadow: #557e98 1px 0px 10px;
+}
+
+section a:active {
+    color: var(--btn-primary);
+    transition: all 0.1s ease;
+}
+
+h3.author-name {
+    font-size: var(--author-price-fsize);
+    color: var(--text-author);
+    font-weight: 400;
+}
+
+.book-card p {
+    font-size: var(--price-fsize);
+    font-weight: 500;
+}
+
+h3.book-name {
+    font-size: var(--book-tittle-fsize);
+}
+
+.cart button {
+    background-color: var(--btn-primary);
+    color: var(--text-secondary);
+    font-size: var(--btn-fsize);
+    font-weight: bold;
+    padding: 10px 25px;
+    border-radius: 1.5rem;
+    margin: 10px 0;
+    transition: all 0.4s ease;
+}
+
+.cart button:hover {
+    background-color: var(--bg-secondary);
+    color: var(--btn-primary);
+}
+
+.cart button:active {
+    transition: all 0s ease;
+    transform: scale(.9);
+    box-shadow: 0 0 10px 0 #00000030;
+}
+
+.cart button.favorite {
+    background-color: var(--btn-secondary);
+}
+
+.cart button.favorite:hover {
+    background-color: var(--btn-primary);
+    color: var(--text-secondary);
+}
