@@ -9,11 +9,30 @@
   <meta http-equiv="author" content="Mustaf Ismajli and Avdyl Dinaj" />
   <link rel="stylesheet" href="./css/styles.css" />
   <title>BookStore</title>
-  <link rel="stylesheet" href="./home.css" />
+  <link rel="stylesheet" href="./css/home.css" />
+  <link rel="stylesheet" href="./css/styles.css" />
 </head>
 
 <body>
-  <header></header>
+  <header>
+    <div class="wrapper">
+      <a href="./index.html"><h1>Online Bookstore</h1></a>
+      <form id="search-form">
+        <input type="text" id="search-input" placeholder="Search for books..." aria-label="Search for books" />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+    <nav>
+      <div class="wrapper">
+        <a href="#new-books">New Books</a>
+        <a href="#best-sellers">Bestsellers</a>
+        <a href="">Special Offers</a>
+        <a href="">Top Sales</a>
+        <a href=""></a>
+      </div>
+    </nav>
+
+  </header>
 
   <section id="hero">
     <div class="wrapper">
@@ -30,145 +49,25 @@
       </main>
     </div>
   </section>
-  <section id="new">
+  <section id="new-books">
     <div class="wrapper">
       <div class="section-caption">
         <h3>New</h3>
-        <a href>View All</a>
+        <a href="./pages/newbooks.html">View All</a>
       </div>
-      <div class="books">
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name">Author</h3>
-          <h3 class="book-name">Spare</h3>
-          <p>12E</p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
+      <div class="books" id="new-books-container">
+
       </div>
     </div>
   </section>
-  <section id="bestSellers">
+  <section id="best-sellers">
     <div class="wrapper">
-
-
       <div class="section-caption">
         <h3>BestSellers</h3>
-        <a href>View All</a>
+        <a href="./pages/newbooks.html">View All</a>
       </div>
-      <div class="books">
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
+      <div class="books" id="best-sellers-container">
+
       </div>
     </div>
   </section>
@@ -188,292 +87,19 @@
       </div>
     </div>
   </section>
-  <section id="specialOffers">
+  <section id="new-books">
     <div class="wrapper">
       <div class="section-caption">
-        <h3>Special Offers</h3>
-        <a href>View All</a>
-      </div>
-      <div class="books">
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="topSales">
-    <div class="wrapper">
-      <div class="section-caption">
-        <h3>Special Offers</h3>
-        <a href>View All</a>
-      </div>
-      <div class="books">
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-        <div class="book-card">
-          <img src alt />
-          <h3 class="author-name"></h3>
-          <h3 class="book-name"></h3>
-          <p></p>
-          <div class="cart">
-            <button>Add to Cart</button>
-            <button class="favorite"><img src alt /></button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="topCollection">
-    <div class="wrapper">
-      <div class="section-caption">
-        <h3>Top Collection</h3>
-        <a href>View All</a>
-      </div>
-      <div class="collection-card">
-        <div class="collection-caption">
-          <h4></h4>
-          <p></p>
-        </div>
-        <div class="books-cover">
-          <img src alt />
-          <img src alt />
-          <img src alt />
-        </div>
-        <a href>Learn more</a>
-      </div>
-      <div class="collection-card">
-        <div class="collection-caption">
-          <h4></h4>
-          <p></p>
-        </div>
-        <div class="books-cover">
-          <img src alt />
-          <img src alt />
-          <img src alt />
-        </div>
-        <a href>Learn more</a>
-      </div>
-      <div class="collection-card">
-        <div class="collection-caption">
-          <h4></h4>
-          <p></p>
-        </div>
-        <div class="books-cover">
-          <img src alt />
-          <img src alt />
-          <img src alt />
-        </div>
-        <a href>Learn more</a>
-      </div>
-      <div class="collection-card">
-        <div class="collection-caption">
-          <h4></h4>
-          <p></p>
-        </div>
-        <div class="books-cover">
-          <img src alt />
-          <img src alt />
-          <img src alt />
-        </div>
-        <a href>Learn more</a>
-      </div>
-      <div class="collection-card">
-        <div class="collection-caption">
-          <h4></h4>
-          <p></p>
-        </div>
-        <div class="books-cover">
-          <img src alt />
-          <img src alt />
-          <img src alt />
-        </div>
-        <a href>Learn more</a>
-      </div>
-      <div class="collection-card">
 
-        <div class="collection-caption">
-          <h4></h4>
-          <p></p>
-        </div>
-        <div class="books-cover">
-          <img src alt />
-          <img src alt />
-          <img src alt />
-        </div>
-        <a href>Learn more</a>
+      </div>
+      <div class="books" id="newBooks-container">
+
       </div>
     </div>
   </section>
-  <section id="bookEvents">
-    <div class="wrapper">
-      <div class="section-caption">
-        <h3>BookEvents</h3>
-        <a href>View All</a>
-      </div>
-      <div class="book-event">
-        <img src alt />
-        <div class="event-caption">
-          <h3></h3>
-          <h4></h4>
-          <p></p>
-          <div class="register">
-            <p class="date"></p>
-            <a href>Register here</a>
-          </div>
-        </div>
-      </div>
-      <div class="book-event">
-        <img src alt />
-        <div class="event-caption">
-          <h3></h3>
-          <h4></h4>
-          <p></p>
-          <div class="register">
-            <p class="date"></p>
-            <a href>Register here</a>
-          </div>
-        </div>
-      </div>
-      <div class="book-event">
-        <img src alt />
-        <div class="event-caption">
-          <h3></h3>
-          <h4></h4>
-          <p></p>
-          <div class="register">
-            <p class="date"></p>
-            <a href>Register here</a>
-          </div>
-        </div>
-      </div>
-      <div class="book-event">
-        <img src alt />
-        <div class="event-caption">
-          <h3></h3>
-          <h4></h4>
-          <p></p>
-          <div class="register">
-            <p class="date"></p>
-            <a href>Register here</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="subscribtion">
-    <div class="wrapper">
-      <h3>Be the first to know everything</h3>
-      <form action>
-        <input type="email" name="email" id="userEmail" />
-        <button class="subscribe">Subscribe</button>
-      </form>
-    </div>
-  </section>
+
+  <script src="./js/script.js"></script>
+
 
 </body>
 
