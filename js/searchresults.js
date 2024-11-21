@@ -43,7 +43,7 @@ function displaySearchResults(books) {
         `;
 
         bookCard.querySelector('.view-details').addEventListener('click', () => {
-            window.location.href = `book.html?id=${book.id}`;
+            window.location.href = `bookdetails.html?id=${book.id}`;
         });
 
         container.appendChild(bookCard);

@@ -52,8 +52,14 @@ function displayBooks(books, topic) {
         bookCard.classList.add('book-card');
         bookCard.innerHTML = `
             <div class="thumbnail">
-                <img src="${thumbnail}" alt="${title}">
-                <a class="view-details">View Details</a>
+                <div class="card">
+                    <div class="front-card">
+                        <img src="${thumbnail}" alt="${title}">
+                    </div>
+                    <div class="back-card">
+                        <a class="view-details">View Details</a>
+                    </div>
+                </div>
             </div> 
             <div class="info">   
                 <h3 class="book-name">${title}</h3>
@@ -66,7 +72,7 @@ function displayBooks(books, topic) {
             </div>    
         `;
 
-        bookCard.querySelector('.view-details').addEventListener('click', () => {
+        bookCard.querySelector('.thumbnail .view-details').addEventListener('click', () => {
             window.location.href = `/pages/bookdetails.html?id=${book.id}`;
         });
 
