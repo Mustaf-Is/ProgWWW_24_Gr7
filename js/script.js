@@ -52,12 +52,26 @@ function displayBooks(books, topic) {
         bookCard.classList.add('book-card');
         bookCard.innerHTML = `
             <div class="thumbnail">
-                <div class="card">
+                <div class="card view-details">
                     <div class="front-card">
                         <img src="${thumbnail}" alt="${title}">
                     </div>
                     <div class="back-card">
                         <a class="view-details">View Details</a>
+                        <ul class="animated-books">
+                            <li><img src="../assets/svgs/book-open.svg" /> </li>
+                            <li><img src="../assets/svgs/book-open.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-open.svg" /></li>
+                            <li><img src="../assets/svgs/book-open.svg" /> </li>
+                            <li><img src="../assets/svgs/book-open.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-open.svg" /></li>
+                        </ul>
                     </div>
                 </div>
             </div> 

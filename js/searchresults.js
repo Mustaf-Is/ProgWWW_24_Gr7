@@ -31,15 +31,44 @@ function displaySearchResults(books) {
         const title = book.volumeInfo.title || 'No Title';
         const authors = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown Author';
         const thumbnail = book.volumeInfo.imageLinks?.thumbnail || 'default-cover.jpg';
+        let price = (Math.random() * 30 + 10).toFixed(2);
 
         const bookCard = document.createElement('div');
         bookCard.classList.add('book-card');
         bookCard.innerHTML = `
-            <img src="${thumbnail}" alt="${title}">
-            <h3 class="book-name">${title}</h3>
-            <h4 class="author-name">${authors}</h4>
-            <button>Add to Cart</button>
-            <button class="view-details">View Details</button>
+            <div class="thumbnail">
+                <div class="card view-details">
+                    <div class="front-card">
+                        <img src="${thumbnail}" alt="${title}">
+                    </div>
+                    <div class="back-card">
+                        <a class="view-details">View Details</a>
+                        <ul class="animated-books">
+                            <li><img src="../assets/svgs/book-open.svg" /> </li>
+                            <li><img src="../assets/svgs/book-open.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-open.svg" /></li>
+                            <li><img src="../assets/svgs/book-open.svg" /> </li>
+                            <li><img src="../assets/svgs/book-open.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-open.svg" /></li>
+                        </ul>
+                    </div>
+                </div>
+            </div> 
+            <div class="info">   
+                <h3 class="book-name">${title}</h3>
+                <h4 class="author-name">${authors}</h4>
+                <p>${price} $</p>
+            </div>
+            <div class="cart">    
+                <button>Add to Cart</button>
+                <button class="favorite"><img src="../assets/svgs/favorite.svg" /></button>
+            </div>  
         `;
 
         bookCard.querySelector('.view-details').addEventListener('click', () => {

@@ -1,6 +1,47 @@
-* {
-     margin: 0;
-     padding: 0;
-     box-sizing: border-box;
+section {
+     width: 100%;
+     margin: 6rem 0;
 }
 
+section .section-caption {
+     padding: 2.5rem 0;
+     display: flex;
+     justify-content: space-between;
+}
+
+section .section-caption h3 {
+     font-size: var(--section-name-fsize);
+}
+
+section a {
+     font-size: var(--view-all-fsize);
+     color: var(--link-view-all);
+     font-weight: bold;
+     transition: all 0.3s ease;
+}
+
+section a:hover {
+     color: var(--link-view-all-hover);
+     text-shadow: #009dff 1px 0px 10px;
+}
+
+section a:active {
+     color: var(--btn-primary);
+     transition: all 0.1s ease;
+}
+
+section .books {
+     display: grid;
+     grid-template-columns: repeat(6, 1fr);
+     gap: 1.25em;
+}
+
+section .book-card .thumbnail {
+     width: 100%;
+     height: 300px;
+}
+
+section .book-card .thumbnail .card {
+     width: 80%;
+     height: 250px;
+}
