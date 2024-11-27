@@ -61,7 +61,9 @@ function displaySearchResults(books) {
                 </div>
             </div> 
             <div class="info">   
-                <h3 class="book-name">${title}</h3>
+                <a class="view-details">
+                    <h3 class="book-name">${title}</h3>
+                </a>
                 <h4 class="author-name">${authors}</h4>
                 <p>${price} $</p>
             </div>

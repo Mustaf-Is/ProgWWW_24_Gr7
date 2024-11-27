@@ -72,7 +72,9 @@ function displayAllBooks(books) {
                 </div>
             </div> 
             <div class="info">   
-                <h3 class="book-name">${title}</h3>
+                <a class="view-details">
+                    <h3 class="book-name">${title}</h3>
+                </a>
                 <h4 class="author-name">${authors}</h4>
                 <p>${price} $</p>
             </div>
@@ -89,6 +91,16 @@ function displayAllBooks(books) {
         container.appendChild(bookCard);
     });
 }
+function handleSearch(event) {
+    event.preventDefault(); // Prevent page reload on form submission
+
+    const searchInput = document.getElementById('search-input').value.trim();
+    if (searchInput) {
+        // Redirect to search results page with query parameter
+        window.location.href = `/pages/search-results.html?query=${encodeURIComponent(searchInput)}`;
+    }
+}
+document.getElementById('search-form').addEventListener('submit', handleSearch);
 
 // Fetch all books for the selected topic
 fetchAllBooksByTopic(topic);

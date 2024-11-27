@@ -1,4 +1,4 @@
-const apiKey = 'AIzaSyAy7iytND3I26lF3HnPGqWxqY27HaB-fv4'; 
+const apiKey = 'AIzaSyAy7iytND3I26lF3HnPGqWxqY27HaB-fv4';
 
 // Get the book ID from the query string
 const urlParams = new URLSearchParams(window.location.search);
@@ -79,7 +79,9 @@ async function fetchSimilarBooks(query) {
                 </div>
             </div> 
             <div class="info">   
-                <h3 class="book-name">${title}</h3>
+                <a class="view-details">
+                    <h3 class="book-name">${title}</h3>
+                </a>
                 <h4 class="author-name">${authors}</h4>
                 <p>${price} $</p>
             </div>
@@ -95,6 +97,18 @@ async function fetchSimilarBooks(query) {
         console.error('Error fetching similar books:', error);
     }
 }
+function handleSearch(event) {
+    event.preventDefault(); // Prevent page reload on form submission
+
+    const searchInput = document.getElementById('search-input').value.trim();
+    if (searchInput) {
+        // Redirect to search results page with query parameter
+        window.location.href = `/pages/search-results.html?query=${encodeURIComponent(searchInput)}`;
+    }
+}
+
+document.getElementById('search-form').addEventListener('submit', handleSearch);
+
 
 // Fetch and display the book details on page load
 fetchBookDetails();

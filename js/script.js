@@ -11,6 +11,9 @@ async function fetchBooksByTopic(topic) {
         case 'best-sellers':
             query = 'subject:fiction&orderBy=relevance'; // Best sellers
             break;
+        case 'books-of-the-week':
+            query = 'award winning fiction&orderBy=relevance';
+            break;
         default:
             query = 'subject:books'; // Fallback to general books
     }
@@ -29,9 +32,22 @@ async function fetchBooksByTopic(topic) {
 
 // Function to display books in their respective sections
 function displayBooks(books, topic) {
-    const containerId = topic === 'new' ? 'new-books-container' : 'best-sellers-container';
-    const container = document.getElementById(containerId);
-    container.innerHTML = ''; // Clear the container
+    let container;
+    switch (topic) {
+        case 'new':
+            container = document.getElementById('new-books-container');
+            break;
+        case 'best-sellers':
+            container = document.getElementById('best-sellers-container');
+            break;   
+        case 'books-of-week':
+            displayBooksOfTheWeek(books.slice(0, 3), topic);
+            break;
+        default:
+            container = document.getElementById('all-books-container');
+        container.innerHTML = '';
+    }
+    
 
     let validBooks = books.filter(book => book.volumeInfo.imageLinks?.thumbnail);
 
@@ -42,9 +58,9 @@ function displayBooks(books, topic) {
     limitedBooks.forEach(book => {
         const title = book.volumeInfo.title || 'No Title';
         const authors = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown Author';
-        let thumbnail = book.volumeInfo.imageLinks.thumbnail;
+        const thumbnail = book.volumeInfo.imageLinks.thumbnail;
         let price = (Math.random() * 40 + 10).toFixed(2); // Random price between 10 and 50
-        let description = book.volumeInfo.description;
+        const description = book.volumeInfo.description;
 
         if (!description) return;
 
@@ -57,7 +73,10 @@ function displayBooks(books, topic) {
                         <img src="${thumbnail}" alt="${title}">
                     </div>
                     <div class="back-card">
-                        <a class="view-details">View Details</a>
+                        <div class="book-description">
+                            <p>${description}</p>
+                            <a class="view-details">View More</a>
+                        </div>
                         <ul class="animated-books">
                             <li><img src="../assets/svgs/book-open.svg" /> </li>
                             <li><img src="../assets/svgs/book-open.svg" /></li>
@@ -75,8 +94,10 @@ function displayBooks(books, topic) {
                     </div>
                 </div>
             </div> 
-            <div class="info">   
-                <h3 class="book-name">${title}</h3>
+            <div class="info">
+                <a class="view-details">
+                    <h3 class="book-name">${title}</h3>
+                </a>
                 <h4 class="author-name">${authors}</h4>
                 <p>${price} $</p>
             </div>
@@ -86,7 +107,7 @@ function displayBooks(books, topic) {
             </div>    
         `;
 
-        bookCard.querySelector('.thumbnail .view-details').addEventListener('click', () => {
+        bookCard.querySelector('.view-details').addEventListener('click', () => {
             window.location.href = `/pages/bookdetails.html?id=${book.id}`;
         });
 
@@ -102,8 +123,65 @@ function handleSearch(event) {
         window.location.href = `/pages/search-results.html?query=${encodeURIComponent(searchInput)}`;
     }
 }
+function displayBooksOfTheWeek(books, topic) {
+    const container = document.getElementById('books-of-the-week-container');
+    container.innerHTML = '';
+
+    let validBooks = books.filter(book => book.volumeInfo.imageLinks?.thumbnail);
+    let limitedBooks = validBooks.slice(0, 3); // Limit to exactly 3 books
+
+    limitedBooks.forEach(book => {
+        const title = book.volumeInfo.title || 'No Title';
+        const authors = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown Author';
+        const thumbnail = book.volumeInfo.imageLinks.thumbnail;
+        let price = (Math.random() * 40 + 10).toFixed(2);
+        const description = book.volumeInfo.description;
+
+        if (!description) return;
+
+        const bookCard = document.createElement('div');
+        bookCard.classList.add('book-card');
+        bookCard.innerHTML = `
+            <div class="thumbnail">
+                <div class="card view-details">
+                    <div class="front-card">
+                        <img src="${thumbnail}" alt="${title}">
+                    </div>
+                    <div class="back-card">
+                        <div class="book-description">
+                            <p>${description}</p>
+                            <a class="view-details">View More</a>
+                        </div>
+                        <ul class="animated-books">
+                            <li><img src="../assets/svgs/book-open.svg" /> </li>
+                            <li><img src="../assets/svgs/book-open.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-open.svg" /></li>
+                            <li><img src="../assets/svgs/book-open.svg" /> </li>
+                            <li><img src="../assets/svgs/book-open.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-closed.svg" /></li>
+                            <li><img src="../assets/svgs/book-open.svg" /></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        bookCard.querySelector('.view-details').addEventListener('click', () => {
+            window.location.href = `/pages/bookdetails.html?id=${book.id}`;
+        });
+
+        container.appendChild(bookCard);
+    });
+}
+
 
 document.getElementById('search-form').addEventListener('submit', handleSearch);
 
 fetchBooksByTopic('new');
 fetchBooksByTopic('best-sellers');
+fetchBooksByTopic('books-of-week');
