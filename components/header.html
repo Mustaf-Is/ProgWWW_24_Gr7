@@ -5,49 +5,47 @@
      <meta charset="UTF-8" />
      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
      <title>Document</title>
-     <link rel="stylesheet" type="text/css" href="/css/home.css" />
+     <link rel="stylesheet" type="text/css" href="/css/styles.css" />
 </head>
 
 <body>
      <header>
-          <div class="header-top">
-               <div class="wrapper">
-                    <div class="logo">
-                         <h2>Illyrian</h2>
-                         <button class="catalog-button">
-                              <i class="fas fa-bars"></i> Catalog
-                         </button>
-                    </div>
-                    <div class="search-bar">
-                         <input type="text" placeholder="Search" />
-                         <button class="search-icon">
-                              <i class="fas fa-search"></i>
-                         </button>
-                    </div>
-                    <div class="header-icons">
-                         <button class="top-right-icons">
-                              <i class="fas fa-shopping-cart"></i> Cart
-                         </button>
-                         <button class="top-right-icons">
-                              <i class="fas fa-heart"></i> Wishlist
-                         </button>
-                         <button class="top-right-icons">
-                              <i class="fas fa-user"></i> Profile
-                         </button>
+          <div class="top">
+               <div class="container">
+                    <a href="./index.html" class ="logo">
+                         <img src="../assets/svgs/books.svg" alt="logo" />
+                         <h1 class="logo">Illyrian</h1>
+                    </a>
+                    <form id="search-form">
+                         <input type="text" id="search-input" placeholder="Search" aria-label="Search for books" />
+                         <button type="submit"><img src="../assets/svgs/search-btn.svg" alt="search button"></button>
+                    </form>
+                    <div class="top-menu">
+                         <a href="" class="cart-list">
+                              <img src="../assets/svgs/cart.svg" alt="shooping-cart">
+                              <p>Cart</p>
+                         </a>
+                         <a href="" class="wish-list">
+                              <img src="../assets/svgs/wish-list.svg" alt="wish-list">
+                              <p>Wish List</p>
+                         </a>
+                         <a href="" class="profile">
+                              <img src="../assets/svgs/profile.svg" alt="profile-pic">
+                              <p>Profile</p>
+                         </a>
                     </div>
                </div>
           </div>
-          <nav class="header-bottom">
-               <div class="wrapper">
-                    <a href="#">News</a>
-                    <a href="#">BestSellers</a>
-                    <a href="#">Special Offers</a>
-                    <a href="#">Top Sales</a>
-                    <a href="#">Gift Card</a>
-                    <a href="#">BookEvents</a>
-                    <a href="#">Top Collection</a>
-               </div>
-          </nav>
+     </header>
+     <nav>
+          <div class="container">
+               <a href="#new-books">New Books</a>
+               <a href="#best-sellers">Bestsellers</a>
+               <a href="">Special Offers</a>
+               <a href="">Top Sales</a>
+               <a href="">Genre</a>
+          </div>
+     </nav>
      </header>
 </body>
 

@@ -1,0 +1,86 @@
+:root {
+   --bg-primary: #1b294e;
+   --bg-secondary: #d2ecfb;
+   --bg-default: #fff;
+   --btn-primary: #1da1f3;
+   --btn-secondary: #e8f7fe;
+   --link-navigation: #1b294e;
+   --link-view-all: #35a8f1;
+   --link-view-all-hover: #16679a;
+   --text-primary: #0f0f0f;
+   --text-secondary: #fff;
+   --text-author: #8e8e8e;
+   --section-name-fsize: 2rem;
+   --view-all-fsize: 1.5rem;
+   --btn-fsize: 1rem;
+   --book-tittle-fsize: 1.25rem;
+   --author-fsize: 1rem;
+   --price-fsize: 1.1rem;
+}
+
+
+.footer-top {
+   background-color: var(--bg-secondary);
+   padding: 20px 0;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   align-items: center;
+   color: #000000;
+   font-size: 1.5em;
+}
+
+.footer-top .subscribe-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 10px;
+}
+
+.footer-top input {
+   padding: 10px;
+   border: none;
+   border-radius: 15px;
+   width: 300px;
+   height: 20px;
+}
+
+.footer-top button {
+   padding: 10px 20px;
+   background-color: var(--bg-primary);
+   color: #fff;
+   border: none;
+   border-radius: 15px;
+   cursor: pointer;
+   height : 40px;
+}
+
+.footer-top button:hover {
+   background-color: #003976;
+}
+
+.footer-bottom {
+   background-color: var(--bg-primary);
+   display: flex;
+   justify-content: space-around;
+   flex-wrap: wrap;
+   color: #ffffff;
+}
+
+
+a {
+   text-decoration: none;
+   color: #ffffff;
+}
+
+.links-container {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+
+.links {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
