@@ -1,8 +1,12 @@
-const apiKey = 'AIzaSyCmaMob8vYKP_2BGuktE2QRKMEKxYxfZ9M';
+const apiKey = 'AIzaSyCyjJG0UWPZQyeQcIf-nmveY7Etb2J3CV4';
 
 // Get the topic from the query string
 const page = window.location.pathname.split('/').pop();
-const topic = page.includes('bestsellers') ? 'best sellers' : 'recent';
+const topic = page.includes('bestsellers') ? 'best-sellers'
+    : page.includes('new-books') ? 'new'
+        : page.includes('books-of-the-week') ? 'books-the-of-week'
+            : page.includes('special-offers') ? 'special-offers'
+                : 'all-books';
 
 // Function to fetch all books for a specific topic
 async function fetchAllBooksByTopic(topic) {
@@ -10,14 +14,20 @@ async function fetchAllBooksByTopic(topic) {
     let query;
 
     switch (topic) {
-        case 'recent':
-            query = 'subject:fiction&orderBy=newest'; // New books
+        case 'new':
+            query = 'published:2024&orderBy=newest'; // New books
             break;
-        case 'best sellers':
-            query = 'subject:fiction&orderBy=relevance'; // Best sellers
+        case 'best-sellers':
+            query = 'new+york+times+bestseller'; // Best sellers
+            break;
+        case 'books-of-the-week':
+            query = 'notable+books+rating+2024&orderBy=relevance';
+            break;
+        case 'special-offers':
+            query = 'subject:computer_science&orderBy=relevance';
             break;
         default:
-            query = 'subject:books'; // Fallback to general books
+            query = 'subject:books';// Fallback to general books
     }
 
     const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}&maxResults=24`;
@@ -40,6 +50,7 @@ function displayAllBooks(books) {
         const title = book.volumeInfo.title || 'No Title';
         const authors = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown Author';
         const thumbnail = book.volumeInfo.imageLinks?.thumbnail || 'default-cover.jpg';
+        const description = book.volumeInfo.description || 'No Description';
         let price = (Math.random() * 30 + 10).toFixed(2);
 
         if (!book.volumeInfo.imageLinks) return;
@@ -53,7 +64,10 @@ function displayAllBooks(books) {
                         <img src="${thumbnail}" alt="${title}">
                     </div>
                     <div class="back-card">
-                        <a class="view-details">View Details</a>
+                        <div class="book-description">
+                            <p>${description}</p>
+                            <a class="view-details">View More</a>
+                        </div>
                         <ul class="animated-books">
                             <li><img src="../assets/svgs/book-open.svg" /> </li>
                             <li><img src="../assets/svgs/book-open.svg" /></li>
@@ -72,7 +86,7 @@ function displayAllBooks(books) {
                 </div>
             </div> 
             <div class="info">   
-                <a class="view-details">
+                <a class="view-details" href="bookdetails.html?id=${book.id}">
                     <h3 class="book-name">${title}</h3>
                 </a>
                 <h4 class="author-name">${authors}</h4>
@@ -100,7 +114,6 @@ function handleSearch(event) {
         window.location.href = `/pages/search-results.html?query=${encodeURIComponent(searchInput)}`;
     }
 }
-document.getElementById('search-form').addEventListener('submit', handleSearch);
 
 // Fetch all books for the selected topic
 fetchAllBooksByTopic(topic);

@@ -1,6 +1,6 @@
-const apiKey = 'AIzaSyAy7iytND3I26lF3HnPGqWxqY27HaB-fv4';
+const apiKey = 'AIzaSyC49N1ngGnHoVJbZzjzZeyfsjeTCsB5Xi8';
 
-// Get the search query from the URL
+// Get the search query from the URL 
 const urlParams = new URLSearchParams(window.location.search);
 const searchQuery = urlParams.get('query');
 
@@ -31,6 +31,7 @@ function displaySearchResults(books) {
         const title = book.volumeInfo.title || 'No Title';
         const authors = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown Author';
         const thumbnail = book.volumeInfo.imageLinks?.thumbnail || 'default-cover.jpg';
+        const description = book.volumeInfo.description || 'No Description Available';
         let price = (Math.random() * 30 + 10).toFixed(2);
 
         const bookCard = document.createElement('div');
@@ -42,7 +43,10 @@ function displaySearchResults(books) {
                         <img src="${thumbnail}" alt="${title}">
                     </div>
                     <div class="back-card">
-                        <a class="view-details">View Details</a>
+                        <div class="book-description">
+                            <p>${description}</p>
+                            <a class="view-details">View More</a>
+                        </div>
                         <ul class="animated-books">
                             <li><img src="../assets/svgs/book-open.svg" /> </li>
                             <li><img src="../assets/svgs/book-open.svg" /></li>
@@ -61,7 +65,7 @@ function displaySearchResults(books) {
                 </div>
             </div> 
             <div class="info">   
-                <a class="view-details">
+                <a class="view-details" href="bookdetails.html?id=${book.id}">
                     <h3 class="book-name">${title}</h3>
                 </a>
                 <h4 class="author-name">${authors}</h4>

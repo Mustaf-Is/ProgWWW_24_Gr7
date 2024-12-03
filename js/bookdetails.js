@@ -1,4 +1,4 @@
-const apiKey = 'AIzaSyAy7iytND3I26lF3HnPGqWxqY27HaB-fv4';
+const apiKey = 'AIzaSyCyjJG0UWPZQyeQcIf-nmveY7Etb2J3CV4';
 
 // Get the book ID from the query string
 const urlParams = new URLSearchParams(window.location.search);
@@ -49,6 +49,7 @@ async function fetchSimilarBooks(query) {
             const title = book.volumeInfo.title || 'No Title';
             const authors = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown Author';
             const thumbnail = book.volumeInfo.imageLinks?.thumbnail || 'default-cover.jpg';
+            const description = book.volumeInfo.description || 'No Description';
             let price = (Math.random() * 30 + 10).toFixed(2);
 
             const bookCard = document.createElement('div');
@@ -60,7 +61,10 @@ async function fetchSimilarBooks(query) {
                         <img src="${thumbnail}" alt="${title}">
                     </div>
                     <div class="back-card">
-                        <a class="view-details">View Details</a>
+                        <div class="book-description">
+                            <p>${description}</p>
+                            <a class="view-details">View More</a>
+                        </div>
                         <ul class="animated-books">
                             <li><img src="../assets/svgs/book-open.svg" /> </li>
                             <li><img src="../assets/svgs/book-open.svg" /></li>
@@ -79,7 +83,7 @@ async function fetchSimilarBooks(query) {
                 </div>
             </div> 
             <div class="info">   
-                <a class="view-details">
+                <a class="view-details" href="/pages/bookdetails.html?id=${book.id}">
                     <h3 class="book-name">${title}</h3>
                 </a>
                 <h4 class="author-name">${authors}</h4>
@@ -90,6 +94,10 @@ async function fetchSimilarBooks(query) {
                 <button class="favorite"><img src="../assets/svgs/favorite.svg" /></button>
             </div>  
             `;
+
+            bookCard.querySelector('.view-details ').addEventListener('click', () => {
+                window.location.href = `/pages/bookdetails.html?id=${book.id}`;
+            });
 
             booksContainer.appendChild(bookCard);
         });
@@ -106,9 +114,6 @@ function handleSearch(event) {
         window.location.href = `/pages/search-results.html?query=${encodeURIComponent(searchInput)}`;
     }
 }
-
-document.getElementById('search-form').addEventListener('submit', handleSearch);
-
 
 // Fetch and display the book details on page load
 fetchBookDetails();

@@ -1,4 +1,4 @@
-const apiKey = 'AIzaSyCmaMob8vYKP_2BGuktE2QRKMEKxYxfZ9M'; // Replace with your API key
+const apiKey = 'AIzaSyC49N1ngGnHoVJbZzjzZeyfsjeTCsB5Xi8'; // Replace with your API key
 
 // Function to fetch books by topic
 async function fetchBooksByTopic(topic) {
@@ -6,13 +6,16 @@ async function fetchBooksByTopic(topic) {
 
     switch (topic) {
         case 'new':
-            query = 'subject:fiction&orderBy=newest'; // New books
-            break;
+            query = 'published:2024&orderBy=newest'; // New books
+            break;  
         case 'best-sellers':
-            query = 'subject:fiction&orderBy=relevance'; // Best sellers
+            query = 'new+york+times+bestseller'; // Best sellers
             break;
         case 'books-of-the-week':
-            query = 'award winning fiction&orderBy=relevance';
+            query = 'notable+books+rating+2024&orderBy=relevance';
+            break;
+        case 'special-offers':
+            query = 'subject:computer_science&orderBy=relevance';
             break;
         default:
             query = 'subject:books'; // Fallback to general books
@@ -40,8 +43,11 @@ function displayBooks(books, topic) {
         case 'best-sellers':
             container = document.getElementById('best-sellers-container');
             break;   
-        case 'books-of-week':
+        case 'books-of-the-week':
             displayBooksOfTheWeek(books.slice(0, 3), topic);
+            break;
+        case 'special-offers':
+            container = document.getElementById('special-offers-container');
             break;
         default:
             container = document.getElementById('all-books-container');
@@ -95,7 +101,7 @@ function displayBooks(books, topic) {
                 </div>
             </div> 
             <div class="info">
-                <a class="view-details">
+                <a class="view-details" href="/pages/bookdetails.html?id=${book.id}">
                     <h3 class="book-name">${title}</h3>
                 </a>
                 <h4 class="author-name">${authors}</h4>
@@ -107,7 +113,7 @@ function displayBooks(books, topic) {
             </div>    
         `;
 
-        bookCard.querySelector('.view-details').addEventListener('click', () => {
+        bookCard.querySelector('.view-details ').addEventListener('click', () => {
             window.location.href = `/pages/bookdetails.html?id=${book.id}`;
         });
 
@@ -184,4 +190,5 @@ document.getElementById('search-form').addEventListener('submit', handleSearch);
 
 fetchBooksByTopic('new');
 fetchBooksByTopic('best-sellers');
-fetchBooksByTopic('books-of-week');
+fetchBooksByTopic('books-of-the-week');
+fetchBooksByTopic('special-offers');
