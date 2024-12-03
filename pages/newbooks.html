@@ -16,7 +16,37 @@
      </div>
 
      <script src="../js/viewall.js"></script>
-     
+     <script>
+          async function loadHeader() {
+               const headerContainer = document.getElementById('header-container');
+               try {
+                    const response = await fetch('../components/header.html');
+                    const html = await response.text();
+                    headerContainer.innerHTML = html;
+
+                    // Reinitialize search functionality after header loads
+                    document.getElementById('search-form').addEventListener('submit', handleSearch);
+               } catch (error) {
+                    console.error('Error loading header:', error);
+               }
+          }
+          loadHeader();
+
+          async function loadFooter(){
+               const footerContainer = document.getElementById('footer-container');
+               try {
+                    const response = await fetch('../components/footer.html');
+                    const html= await response.text();
+                    footerContainer.innerHTML = html;
+
+               }catch (error){
+                    console.error('Error loading footer:', error);
+               }
+          }
+          loadFooter();
+     </script>
+
+     <div id="footer-container"></div>
 </body>
 
 </html>

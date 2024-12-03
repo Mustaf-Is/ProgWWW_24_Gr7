@@ -15,18 +15,65 @@ async function fetchBookDetails() {
         const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}?key=${apiKey}`);
         const book = await response.json();
 
-        const { title, authors, description, imageLinks } = book.volumeInfo;
-
+        const title = book.volumeInfo.title || 'No Title';
+        const authors = book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown Author';
+        const thumbnail = book.volumeInfo.imageLinks?.thumbnail || 'default-cover.jpg'
+        const publisher = book.volumeInfo.publisher || 'No Publisher';
+        const publishedDate = book.volumeInfo.publishedDate || 'No Published Date';
+        const pagCount = book.volumeInfo.pageCount || 'No Page Count';
+        const categories = book.volumeInfo.categories ? book.volumeInfo.categories.join(', ') : 'No Categories';
+        let price = (Math.random() * 40 + 10).toFixed(2); // Random price between 10 and 50
+        const description = book.volumeInfo.description;
+        const isbn = book.volumeInfo.industryIdentifiers?.[0]?.identifier || 'Not available';
+        const languageMap = {
+            'en': 'English',
+            'fr': 'French',
+            'es': 'Spanish',
+            'de': 'German',
+            'it': 'Italian',
+            'pt': 'Portuguese',
+            'ru': 'Russian',
+            'zh': 'Chinese',
+            'ja': 'Japanese',
+            'ar': 'Arabic',
+            'hi': 'Hindi',
+            'tr': 'Turkish',
+            'nl': 'Dutch',
+            'pl': 'Polish',
+            'ko': 'Korean',
+            'sv': 'Swedish'
+        };
+        const getLanguage = book.volumeInfo.language || 'Language not available';
+        const language = languageMap[getLanguage] || 'Unknown Language';
         const bookDetails = document.getElementById('book-details');
         bookDetails.innerHTML = `
-            <img src="${imageLinks?.thumbnail || 'default-cover.jpg'}" alt="${title}">
-            <h1>${title}</h1>
-            <h2>${authors ? authors.join(', ') : 'Unknown Author'}</h2>
-            <p>${description}</p>
-            <div class="cart">
-                <button>Add to Cart</button>
-                <button>Buy Now</button>
+        <div class="wrapper">        
+            <img src="${thumbnail}" alt="${title}">
+            <div class="info">
+                <h1>${title}</h1>
+                <h3>${authors}</h3>
+                <h2>Description</h2>
+                <p>${description}</p>
+                <div class="cart">
+                    <button class="add">Add to Cart</button>
+                    <button>Buy Now</button>
+                </div>
+            </div> 
+        </div>      
+        `;
+        const productDetails = document.getElementById('product-details');
+        productDetails.innerHTML = `
+        <div class="wrapper">
+            <h2>Product Details</h2>
+            <div class="details">
+                <p>ISBN: ${isbn}</p>
+                <p>Publisher: ${publisher}</p>
+                <p>Published Date: ${publishedDate}</p>
+                <p>Pages: ${pagCount}</p>
+                <p>Language: ${language}</p>
+                <p>Category: ${categories}</p>
             </div>
+        </div>
         `;
 
         fetchSimilarBooks(title); // Fetch and display similar books

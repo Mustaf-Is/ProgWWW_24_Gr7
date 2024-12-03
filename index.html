@@ -55,7 +55,7 @@
 
   <section id="hero">
     <img src="./assets/images/img-left.webp" alt="">
-    <img src="./assets/images/img-right.jpg" alt="">  
+    <img src="./assets/images/img-right.jpg" alt="">
     <div class="wrapper">
       <h1>Welcome to Illyrian Bookstore!</h1>
       <main>
@@ -127,7 +127,24 @@
   </section>
   <script src="./js/script.js"></script>
 
+  <div id="footer-container">
 
+  </div>
+
+  <script>
+    async function loadFooter() {
+      const footerContainer = document.getElementById('footer-container');
+      try {
+        const response = await fetch('../components/footer.html');
+        const html = await response.text();
+        footerContainer.innerHTML = html;
+
+      } catch (error) {
+        console.error('Error loading footer:', error);
+      }
+    }
+    loadFooter();
+  </script>
 </body>
 
 </html>
