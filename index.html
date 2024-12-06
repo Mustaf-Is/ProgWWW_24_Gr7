@@ -2,6 +2,14 @@
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A bookstore for buying Books, ebooks, and audiobooks online" />
+  <meta name="keywords" content="Online bookstore, books, ebooks" />
+  <meta http-equiv="author" content="Mustaf Ismajli and Avdyl Dinaj" />
+  <title>Illyrian Books</title>
+  <link rel="stylesheet" href="./css/home.css" />
+  <link rel="stylesheet" href="./css/styles.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="A bookstore for buying Books, ebooks, and audiobooks online" />
@@ -15,6 +23,43 @@
 
 <body>
 
+  <header>
+    <div class="top">
+      <div class="container">
+        <a href="./index.html" class="logo">
+          <img src="../assets/svgs/books.svg" alt="logo" />
+          <h1 class="logo">illyrian <span>books</span></h1>
+        </a>
+        <form id="search-form">
+          <input type="text" id="search-input" placeholder="Search" aria-label="Search for books" />
+          <button type="submit"><img src="../assets/svgs/search-btn.svg" alt="search button"></button>
+        </form>
+        <div class="top-menu">
+          <a href="" class="cart-list">
+            <img src="../assets/svgs/cart.svg" alt="shooping-cart">
+            <p>Cart</p>
+          </a>
+          <a href="" class="wish-list">
+            <img src="../assets/svgs/wish-list.svg" alt="wish-list">
+            <p>Wish List</p>
+          </a>
+          <a href="" class="profile">
+            <img src="../assets/svgs/profile.svg" alt="profile-pic">
+            <p>Cart</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <nav style="   background-color: #D4EBF8;">
+    <div class="container">
+      <a href="#new-books">New Books</a>
+      <a href="#best-sellers">Bestsellers</a>
+      <a href="#special-offers">Special Offers</a>
+      <a href="#top-sales">Top Sales</a>
+      <a href="#genre">Genre</a>
+    </div>
+  </nav>
     <header>
         <div class="top">
             <div class="container">
@@ -53,6 +98,47 @@
         </div>
     </nav>
 
+  <section id="hero">
+    <img src="./assets//svgs/book-for-hero].svg" alt="">
+    <img src="./assets/svgs/book-for-hero-2.svg" alt="">
+    <div class="wrapper">
+      <h1>Welcome to <span>illyrian books</span></h1>
+      <main>
+        <div class="container">
+          <ul class="typing-text">
+            <li>
+              "<span class="dynamic">A room without books is like a body without a soul</span>"
+            </li>
+            <li>
+              "<span class="dynamic">A reader lives a thousand lives before he dies</span>"
+            </li>
+            <li>
+              "<span class="dynamic">So many books, so little time</span>"
+            </li>
+            <li>
+              "<span class="dynamic">A book is a dream you hold in your hands</span>"
+            </li>
+          </ul>
+          <p> <span style="color: #1da1f3; font-weight: bold ; font-size: 1.35rem;">Your journey begins here - grab a
+              book from our
+              unparalleled variety and let the story take you away.</span>
+            <br>
+            With countless genres, bestsellers, and hidden gems waiting to be discovered, there's something for
+            everyone.
+          </p>
+          <p class="small">Want to benefit from our offers?</p>
+          <div class="see-more">
+            <a href="#special-offers">View Offers</a>
+            <a href="./pages/newbooks.html">View more</a>
+          </div>
+        </div>
+        <div class="image-container">
+          <img src="./assets/images/Untitled-1.png" alt="">
+        </div>
+      </main>
+    </div>
+
+  </section>
     <section id="hero">
         <img src="./assets/images/img-left.webp" alt="">
         <img src="./assets/images/img-right.jpg" alt="">
@@ -107,9 +193,9 @@
                     <h3>Books of the week</h3>
                     <p>With the millions of books to read from, we want to make it easy for you to discover your next
                         great read.
-                        According to data sources, these are the top three trending books of the week.
+                        According to our data sources, these are the top three trending books of the week.
                     </p>
-                    <button>Learn More</button>
+                    <p style="font-weight: bold; color: #1da1f3;">Grab these top picks of the week - stories you won't want to miss!</p>
                 </div>
             </div>
         </div>

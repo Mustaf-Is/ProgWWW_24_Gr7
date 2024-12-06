@@ -1,10 +1,10 @@
 const apiKey = 'AIzaSyCyjJG0UWPZQyeQcIf-nmveY7Etb2J3CV4';
 
-// Get the book ID from the query string
+
 const urlParams = new URLSearchParams(window.location.search);
 const bookId = urlParams.get('id');
 
-// Function to fetch and display the book details
+
 async function fetchBookDetails() {
     if (!bookId) {
         document.getElementById('book-details').innerHTML = '<p>Book not found.</p>';
@@ -21,9 +21,9 @@ async function fetchBookDetails() {
         const publisher = book.volumeInfo.publisher || 'No Publisher';
         const publishedDate = book.volumeInfo.publishedDate || 'No Published Date';
         const pagCount = book.volumeInfo.pageCount || 'No Page Count';
-        const categories = book.volumeInfo.categories ? book.volumeInfo.categories.join(', ') : 'No Categories';
+        const categories = book.volumeInfo.categories ? book.volumeInfo.categories[0] : 'No Categories';
         let price = (Math.random() * 40 + 10).toFixed(2); // Random price between 10 and 50
-        const description = book.volumeInfo.description;
+        // const description = truncateDescription(book.volumeInfo.description);
         const isbn = book.volumeInfo.industryIdentifiers?.[0]?.identifier || 'Not available';
         const languageMap = {
             'en': 'English',
@@ -47,43 +47,53 @@ async function fetchBookDetails() {
         const language = languageMap[getLanguage] || 'Unknown Language';
         const bookDetails = document.getElementById('book-details');
         bookDetails.innerHTML = `
-        <div class="wrapper">        
-            <img src="${thumbnail}" alt="${title}">
-            <div class="info">
-                <h1>${title}</h1>
-                <h3>${authors}</h3>
-                <h2>Description</h2>
-                <p>${description}</p>
-                <div class="cart">
-                    <button class="add">Add to Cart</button>
-                    <button>Buy Now</button>
+        <div class="wrapper">
+            <div class="details-container">
+                <div class="img-wrapper">
+                    <img src="${thumbnail}" alt="${title}">
                 </div>
-            </div> 
+                <div class="book-info">
+                    <h1>${title}</h1>
+                    <h3>${authors}</h3>
+                    <h2>Description</h2>
+                    <p class="description">${description}</p>
+                    <p class="price">Price:<span> $${price} </span></p>
+                    <div class="cart">
+                        <button>Buy it Now</button>
+                        <button class="add">Add to Cart</button>                        
+                    </div>
+                </div> 
+            </div>
         </div>      
         `;
         const productDetails = document.getElementById('product-details');
         productDetails.innerHTML = `
         <div class="wrapper">
-            <h2>Product Details</h2>
-            <div class="details">
-                <p>ISBN: ${isbn}</p>
-                <p>Publisher: ${publisher}</p>
-                <p>Published Date: ${publishedDate}</p>
-                <p>Pages: ${pagCount}</p>
-                <p>Language: ${language}</p>
-                <p>Category: ${categories}</p>
+            <div class="product-container">
+                <h2>Product Details</h2>
+                <div class="product-details">
+                    <p>Price:<span> $${price} </span></p>
+                    <p>ISBN:<span> ${isbn}</span></p>
+                    <p>Publisher: <span> ${publisher}</span></p>
+                    <p>Published Date:<span> ${publishedDate}</span></p>
+                    <p>Pages:<span> ${pagCount}</span></p>
+                    <p>Language:<span> ${language}</span></p>
+                    <p>Category:<span> ${categories}</span></p>
+                </div>
             </div>
         </div>
         `;
 
-        fetchSimilarBooks(title); // Fetch and display similar books
+        fetchSimilarBooks(title); 
     } catch (error) {
         console.error('Error fetching book details:', error);
         document.getElementById('book-details').innerHTML = '<p>Failed to load book details.</p>';
     }
 }
 
-// Function to fetch and display similar books
+/*Truncate Function*/
+
+
 async function fetchSimilarBooks(query) {
     try {
         const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}`);
@@ -153,14 +163,12 @@ async function fetchSimilarBooks(query) {
     }
 }
 function handleSearch(event) {
-    event.preventDefault(); // Prevent page reload on form submission
+    event.preventDefault(); 
 
     const searchInput = document.getElementById('search-input').value.trim();
     if (searchInput) {
-        // Redirect to search results page with query parameter
         window.location.href = `/pages/search-results.html?query=${encodeURIComponent(searchInput)}`;
     }
 }
 
-// Fetch and display the book details on page load
 fetchBookDetails();
