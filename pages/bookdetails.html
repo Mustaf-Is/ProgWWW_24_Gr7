@@ -2,58 +2,58 @@
 <html lang="en">
 
 <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="../css/styles.css" />
-     <!-- <link rel="stylesheet" href="../css/bookdetails.css" /> -->
-     <title>Book Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/bookdetails.css" />
+    <title>Book Details</title>
 </head>
 
 <body>
-     <div id="header-container"></div>
-     
-     <div id="book-details"></div>
-     <div id="product-details"></div>
+    <div id="header-container"></div>
 
-     <div class="wrapper">
-          <div id="similar-books">
-               <h2>Similar Books</h2>
-               <div class="books"></div>
-          </div>
-     </div>
+    <div id="book-details"></div>
+    <div id="product-details"></div>
 
-     <script src="../js/bookdetails.js"></script>
-     <script>
-          async function loadHeader() {
-               const headerContainer = document.getElementById('header-container');
-               try {
-                    const response = await fetch('../components/header.html');
-                    const html = await response.text();
-                    headerContainer.innerHTML = html;
+    <div class="wrapper">
+        <div id="similar-books">
+            <h2>Similar Books</h2>
+            <div class="books"></div>
+        </div>
+    </div>
 
-                    // Reinitialize search functionality after header loads
-                    document.getElementById('search-form').addEventListener('submit', handleSearch);
-               } catch (error) {
-                    console.error('Error loading header:', error);
-               }
-          }
-          loadHeader();
+    <script src="../js/bookdetails.js"></script>
+    <script>
+        async function loadHeader() {
+            const headerContainer = document.getElementById('header-container');
+            try {
+                const response = await fetch('../components/header.html');
+                const html = await response.text();
+                headerContainer.innerHTML = html;
 
-          async function loadFooter(){
-               const footerContainer = document.getElementById('footer-container');
-               try {
-                    const response = await fetch('../components/footer.html');
-                    const html= await response.text();
-                    footerContainer.innerHTML = html;
+                // Reinitialize search functionality after header loads
+                document.getElementById('search-form').addEventListener('submit', handleSearch);
+            } catch (error) {
+                console.error('Error loading header:', error);
+            }
+        }
+        loadHeader();
 
-               }catch (error){
-                    console.error('Error loading footer:', error);
-               }
-          }
-          loadFooter();
-     </script>
+        async function loadFooter() {
+            const footerContainer = document.getElementById('footer-container');
+            try {
+                const response = await fetch('../components/footer.html');
+                const html = await response.text();
+                footerContainer.innerHTML = html;
 
-     <div id="footer-container"></div>
+            } catch (error) {
+                console.error('Error loading footer:', error);
+            }
+        }
+        loadFooter();
+    </script>
+
+    <div id="footer-container"></div>
 </body>
 
 </html>

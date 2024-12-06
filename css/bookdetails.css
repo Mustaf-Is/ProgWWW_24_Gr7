@@ -1,0 +1,132 @@
+#book-details{
+    padding: 4rem 0;
+}
+
+#book-details .details-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 10px;
+}
+#book-details .details-container .img-wrapper{
+    flex-basis: 30%;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.img-wrapper img{
+    width: 60%;
+    aspect-ratio: 2/3;
+    object-fit: contain;
+    border-radius: 1.5rem;
+}
+
+#book-details .details-container .book-info{
+    flex-basis: 70%;
+}
+
+#book-details .book-info h1{
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 5px 0;
+}
+#book-details .book-info h3{
+    font-size: 1.2rem;
+    color: var(--text-author);
+    font-weight: bold;
+    padding: 5px 0;
+}
+#book-details .book-info h2{
+    font-size: 1.2rem;
+    padding: 5px 0;
+    font-weight: 600;
+}
+#book-details .book-info p.description{
+    font-size: 1rem;
+    padding: 8px 0;
+}
+#book-details .book-info p.price {
+    padding: 5px 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+#book-details .book-info p.price span{
+    padding: 0 3px;
+    font-weight: bold;
+    color: var(--bg-primary);
+}
+#book-details .book-info .cart{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: start;
+    padding: 10px 0;
+}
+#book-details .book-info .cart button{
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 25px;
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+#book-details .book-info .cart button:first-child{
+    background-color: var(--btn-primary);
+    color: var(--text-secondary);
+}
+
+#book-details .book-info .cart button:first-child:hover{
+    background-color: var(--bg-secondary);
+    color: var(--btn-primary);
+}
+#book-details .book-info .cart button:nth-child(2){
+    background-color: var(--text-secondary);
+    color: var(--btn-primary);
+    border: solid 2px var(--btn-primary);
+}
+#book-details .book-info .cart button:nth-child(2):hover{
+    background-color: var(--btn-primary);
+    color: var(--text-secondary);
+}
+
+#book-details .book-info .cart button:active{
+    transform: scale(.9);
+    box-shadow: 0 0 10px 0 #00000030;
+    transition: all 0.05s ease;
+}
+#product-details {
+    padding: 2rem 0;
+    width: 100%;
+    background-color: var(--bg-secondary);
+}
+#product-details .product-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#product-details .product-container h2{
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 10px 0;
+}
+#product-details .product-container .product-details > p{
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 5px 0;
+}
+#product-details .product-container .product-details > p span{
+    font-weight: 500;
+    padding: 0 3px;
+    color: var(--bg-primary);
+}
+#similar-books{
+    margin: 4rem 0;
+}
+#similar-books h2{
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--bg-primary);
+    text-align: center;
+}

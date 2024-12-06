@@ -23,7 +23,7 @@ async function fetchBookDetails() {
         const pagCount = book.volumeInfo.pageCount || 'No Page Count';
         const categories = book.volumeInfo.categories ? book.volumeInfo.categories[0] : 'No Categories';
         let price = (Math.random() * 40 + 10).toFixed(2); // Random price between 10 and 50
-        // const description = truncateDescription(book.volumeInfo.description);
+        const description = truncateDescription(book.volumeInfo.description);
         const isbn = book.volumeInfo.industryIdentifiers?.[0]?.identifier || 'Not available';
         const languageMap = {
             'en': 'English',
@@ -91,7 +91,27 @@ async function fetchBookDetails() {
     }
 }
 
-/*Truncate Function*/
+function truncateDescription(description) {
+    if (!description) return 'No description available';
+    
+    const maxLength = 1000;
+    
+    if (description.length <= maxLength) {
+        return description;
+    }
+    
+    let truncated = description.substring(0, maxLength);
+    let lastSentence = truncated.lastIndexOf('.');
+    
+    if (lastSentence > 0) {
+        truncated = truncated.substring(0, lastSentence + 1);
+    } else {
+        let lastSpace = truncated.lastIndexOf(' ');
+        truncated = truncated.substring(0, lastSpace);
+    }
+    
+    return truncated + '...';
+}
 
 
 async function fetchSimilarBooks(query) {
