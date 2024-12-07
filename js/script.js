@@ -7,7 +7,7 @@ async function fetchBooksByTopic(topic) {
     switch (topic) {
         case 'new':
             query = 'published:2024&orderBy=newest'; // New books
-            break;  
+            break;
         case 'best-sellers':
             query = 'new+york+times+bestseller'; // Best sellers
             break;
@@ -16,6 +16,9 @@ async function fetchBooksByTopic(topic) {
             break;
         case 'special-offers':
             query = 'subject:computer_science&orderBy=relevance';
+            break;
+        case 'top-sales':
+            query = 'subject:fiction&orderBy=relevance';
             break;
         default:
             query = 'subject:books'; // Fallback to general books
@@ -42,18 +45,21 @@ function displayBooks(books, topic) {
             break;
         case 'best-sellers':
             container = document.getElementById('best-sellers-container');
-            break;   
+            break;
         case 'books-of-the-week':
             displayBooksOfTheWeek(books.slice(0, 3), topic);
             break;
         case 'special-offers':
             container = document.getElementById('special-offers-container');
             break;
+        case 'top-sales':
+            container = document.getElementById('top-sales-container');
+            break;
         default:
             container = document.getElementById('all-books-container');
-        container.innerHTML = '';
+            container.innerHTML = '';
     }
-    
+
 
     let validBooks = books.filter(book => book.volumeInfo.imageLinks?.thumbnail);
 
@@ -192,3 +198,4 @@ fetchBooksByTopic('new');
 fetchBooksByTopic('best-sellers');
 fetchBooksByTopic('books-of-the-week');
 fetchBooksByTopic('special-offers');
+fetchBooksByTopic('top-sales');

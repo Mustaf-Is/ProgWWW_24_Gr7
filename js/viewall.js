@@ -6,7 +6,8 @@ const topic = page.includes('newbooks') ? 'new' :
     page.includes('bestsellers') ? 'best-sellers'
         : page.includes('books-of-the-week') ? 'books-the-of-week'
             : page.includes('special-offers') ? 'special-offers'
-                : 'all-books';
+                : page.includes('topsales') ? 'top-sales'
+                    : 'all-books';
 
 // Function to fetch all books for a specific topic
 async function fetchAllBooksByTopic(topic) {
@@ -25,6 +26,9 @@ async function fetchAllBooksByTopic(topic) {
             break;
         case 'special-offers':
             query = 'subject:computer_science&orderBy=relevance';
+            break;
+        case 'top-sales':
+            query = 'subject:fiction&orderBy=relevance';
             break;
         default:
             query = 'subject:books';// Fallback to general books
