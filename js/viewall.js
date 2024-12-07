@@ -2,8 +2,8 @@ const apiKey = 'AIzaSyCyjJG0UWPZQyeQcIf-nmveY7Etb2J3CV4';
 
 // Get the topic from the query string
 const page = window.location.pathname.split('/').pop();
-const topic = page.includes('bestsellers') ? 'best-sellers'
-    : page.includes('new-books') ? 'new'
+const topic = page.includes('newbooks') ? 'new' :
+    page.includes('bestsellers') ? 'best-sellers'
         : page.includes('books-of-the-week') ? 'books-the-of-week'
             : page.includes('special-offers') ? 'special-offers'
                 : 'all-books';
@@ -110,7 +110,7 @@ function handleSearch(event) {
 
     const searchInput = document.getElementById('search-input').value.trim();
     if (searchInput) {
-        
+
         window.location.href = `/pages/search-results.html?query=${encodeURIComponent(searchInput)}`;
     }
 }
