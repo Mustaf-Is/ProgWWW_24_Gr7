@@ -11,7 +11,7 @@
 
 <body>
      <div id="header-container"></div>
-     <div class="wrapper">
+     <div class="wrapper"  style="margin: 3rem auto;">
           <h3>Favorites</h3>
           <div id="favorites">
                <div id="favorites-container">
@@ -19,6 +19,8 @@
                </div>
           </div>
      </div>
+     <div id="footer-container"></div>
+
 
      <script src="../js/utilties.js"></script>
      <script>
@@ -55,13 +57,13 @@
                const result = addToCart(item);
 
                if (result.success) {
-                    
+
                     toggleFavorite(item);
-                    
+
                     displayFavorites();
                     alert('Item successfully moved to cart!');
                     updateHeaderCounts();
-                    
+
                }
           }
 
@@ -73,8 +75,10 @@
                     <div class="favorite-item">
                          <img src="${item.thumbnail}" alt="${item.title}">
                          <div class="item-details">
-                              <h3>${item.title}</h3>
-                              <p>By: ${item.author}</p>
+                              <div class = "cartItem-info">
+                                   <h3>${item.title}</h3>
+                                   <p>By: ${item.author}</p>
+                              </div>
                               <div class="action-buttons">
                                    <button onclick="moveToCart({
                                    id: '${item.id}',
@@ -88,7 +92,7 @@
                                    title: '${item.title}',
                                    author: '${item.author}',
                                    thumbnail: '${item.thumbnail}'
-                                   }); displayFavorites(); updateHeaderCounts();">Remove from Favorites</button>
+                                   }); displayFavorites(); updateHeaderCounts();"><img src="../assets/svgs/delete-2-svgrepo-com.svg"/></button>
                               </div>
                          </div>
                     </div>
@@ -100,9 +104,6 @@
      </script>
 
 
-     <div id="footer-container">
-
-     </div>
 </body>
 
 </html>

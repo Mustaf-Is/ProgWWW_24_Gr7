@@ -38,6 +38,15 @@ function toggleFavorite(book) {
         return { success: true, message: 'Removed from favorites!', action: 'removed' };
     }
 }
+function handleSearch(event) {
+    event.preventDefault(); // Prevent page reload on form submission
+
+    const searchInput = document.getElementById('search-input').value.trim();
+    if (searchInput) {
+        // Redirect to search results page with query parameter
+        window.location.href = `/pages/search-results.html?query=${encodeURIComponent(searchInput)}`;
+    }
+}
 
 
 
