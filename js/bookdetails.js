@@ -66,6 +66,18 @@ async function fetchBookDetails() {
             </div>
         </div>      
         `;
+        bookDetails.querySelector('.cart .add').addEventListener('click', () => {
+            const bookData = {
+                id: book.id,
+                title: title,
+                author: authors,
+                price: price,
+                thumbnail: thumbnail
+            };
+
+            const result = addToCart(bookData);
+            alert(result.message);
+        });
         const productDetails = document.getElementById('product-details');
         productDetails.innerHTML = `
         <div class="wrapper">
@@ -83,8 +95,7 @@ async function fetchBookDetails() {
             </div>
         </div>
         `;
-
-        fetchSimilarBooks(title); 
+        fetchSimilarBooks(title);
     } catch (error) {
         console.error('Error fetching book details:', error);
         document.getElementById('book-details').innerHTML = '<p>Failed to load book details.</p>';
@@ -93,23 +104,23 @@ async function fetchBookDetails() {
 
 function truncateDescription(description) {
     if (!description) return 'No description available';
-    
+
     const maxLength = 1000;
-    
+
     if (description.length <= maxLength) {
         return description;
     }
-    
+
     let truncated = description.substring(0, maxLength);
     let lastSentence = truncated.lastIndexOf('.');
-    
+
     if (lastSentence > 0) {
         truncated = truncated.substring(0, lastSentence + 1);
     } else {
         let lastSpace = truncated.lastIndexOf(' ');
         truncated = truncated.substring(0, lastSpace);
     }
-    
+
     return truncated + '...';
 }
 
@@ -176,6 +187,39 @@ async function fetchSimilarBooks(query) {
                 window.location.href = `/pages/bookdetails.html?id=${book.id}`;
             });
 
+            bookCard.querySelector('.cart button').addEventListener('click', () => {
+                const bookData = {
+                    id: book.id,
+                    title: title,
+                    author: authors,
+                    price: price,
+                    thumbnail: thumbnail
+                };
+
+                const result = addToCart(bookData);
+                alert(result.message);
+            });
+
+            bookCard.querySelector('.favorite').addEventListener('click', (e) => {
+                const bookData = {
+                    id: book.id,
+                    title: title,
+                    author: authors,
+                    thumbnail: thumbnail
+                };
+
+                const result = toggleFavorite(bookData);
+                const favoriteBtn = e.currentTarget;
+
+                if (result.action === 'added') {
+                    favoriteBtn.classList.add('active');
+                    favoriteBtn.querySelector('img').style.filter = 'invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg)';
+                } else {
+                    favoriteBtn.classList.remove('active');
+                    favoriteBtn.querySelector('img').style.filter = 'none';
+                }
+            });
+
             booksContainer.appendChild(bookCard);
         });
     } catch (error) {
@@ -183,7 +227,7 @@ async function fetchSimilarBooks(query) {
     }
 }
 function handleSearch(event) {
-    event.preventDefault(); 
+    event.preventDefault();
 
     const searchInput = document.getElementById('search-input').value.trim();
     if (searchInput) {

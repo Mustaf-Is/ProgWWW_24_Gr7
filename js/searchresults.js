@@ -81,6 +81,39 @@ function displaySearchResults(books) {
             window.location.href = `bookdetails.html?id=${book.id}`;
         });
 
+        bookCard.querySelector('.cart button').addEventListener('click', () => {
+            const bookData = {
+                id: book.id,
+                title: title,
+                author: authors,
+                price: price,
+                thumbnail: thumbnail
+            };
+
+            const result = addToCart(bookData);
+            alert(result.message);
+        });
+
+        bookCard.querySelector('.favorite').addEventListener('click', (e) => {
+            const bookData = {
+                id: book.id,
+                title: title,
+                author: authors,
+                thumbnail: thumbnail
+            };
+
+            const result = toggleFavorite(bookData);
+            const favoriteBtn = e.currentTarget;
+
+            if (result.action === 'added') {
+                favoriteBtn.classList.add('active');
+                favoriteBtn.querySelector('img').style.filter = 'invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg)';
+            } else {
+                favoriteBtn.classList.remove('active');
+                favoriteBtn.querySelector('img').style.filter = 'none';
+            }
+        });
+
         container.appendChild(bookCard);
     });
 }

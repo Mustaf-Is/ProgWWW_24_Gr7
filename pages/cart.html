@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="../css/styles.css" />
+     <link rel="stylesheet" href="../css/utilites.css">
+     <title>Your Cart</title>
+</head>
+
+<body>
+     <div id="header-container"></div>
+     <div class="wrapper" style="margin: 3rem auto;">
+          <h3>Cart</h3>
+          <div id="carts">
+               <div id="cart-container">
+
+               </div>
+          </div>
+     </div>
+     <div class="order">
+          <div class="wrapper">
+               <div class="order-container">
+                    <h3>Subtotal amount: <span id="sub-amount"></span></h3>
+                    <h3>Discount: <span>0</span></h3>
+                    <h3>Shipping: <span>Free</span></h3>
+               </div>
+               <div class="place-order">
+                    <h3>Total Amount: <span id="total-amount"></span></h3>
+                    <p>without shipping</p>
+                    <button id="orderBtn">Place Order</button>
+               </div>
+          </div>
+     </div>
+
+     <script src="../js/utilties.js"></script>
+     <script>
+          async function loadHeader() {
+               const headerContainer = document.getElementById('header-container');
+               try {
+                    const response = await fetch('../components/header.html');
+                    const html = await response.text();
+                    headerContainer.innerHTML = html;
+
+                    // Reinitialize search functionality after header loads
+                    document.getElementById('search-form').addEventListener('submit', handleSearch);
+               } catch (error) {
+                    console.error('Error loading header:', error);
+               }
+          }
+          loadHeader();
+
+          async function loadFooter() {
+               const footerContainer = document.getElementById('footer-container');
+               try {
+                    const response = await fetch('../components/footer.html');
+                    const html = await response.text();
+                    footerContainer.innerHTML = html;
+
+               } catch (error) {
+                    console.error('Error loading footer:', error);
+               }
+          }
+          loadFooter();
+
+          function updateQuantity(bookId, change) {
+               const cart = getCartItems();
+               const item = cart.find(item => item.id === bookId);
+
+               if (item) {
+                    const newQuantity = item.quantity + change;
+                    if (newQuantity >= 1 && newQuantity <= 5) { 
+                         item.quantity = newQuantity;
+                         localStorage.setItem('cart', JSON.stringify(cart));
+                         displayCart(); 
+                    }
+               }
+          }
+          function removeFromCart(bookId) {
+               const cart = getCartItems();
+               const updatedCart = cart.filter(item => item.id !== bookId);
+               localStorage.setItem('cart', JSON.stringify(updatedCart));
+               displayCart(); 
+          }
+
+          function displayCart() {
+               const cartItems = getCartItems();
+               const cartContainer = document.getElementById('cart-container');
+               let total = 0
+               cartContainer.innerHTML = cartItems.map(item => {
+                    total += item.price * item.quantity;
+                    return `
+                         <div class="cart-item">
+                              <img src="${item.thumbnail}" alt="${item.title}">
+                              <div class="item-details">
+                                   <div class="cartItem-info">
+                                        <h3>${item.title}</h3>
+                                        <p>By: ${item.author}</p>
+                                   </div>
+                                   <div class="quantity-controls">
+                                        <button onclick="updateQuantity('${item.id}', -1)">-</button>
+                                        <span>${item.quantity}</span>
+                                        <button onclick="updateQuantity('${item.id}', 1)">+</button>
+                                   </div>
+                                   <p>Quantity: ${item.quantity}</p>
+                                   <p>$${item.price}</p>
+                                   <button  onclick="removeFromCart('${item.id}')"><img src="../assets/svgs/delete-2-svgrepo-com.svg"/> </button>
+                              </div>
+                         </div>
+                    `;
+               }).join('');
+
+               document.getElementById('sub-amount').innerHTML = total.toFixed(2);
+               document.getElementById('total-amount').innerHTML = total.toFixed(2);
+          }
+
+          displayCart();
+
+     </script>
+
+
+     <div id="footer-container">
+
+     </div>
+</body>
+
+</html>

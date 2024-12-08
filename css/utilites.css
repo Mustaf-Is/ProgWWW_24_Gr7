@@ -1,0 +1,119 @@
+* {
+    box-sizing: border-box;
+}
+
+.wrapper>h3 {
+    font-size: 2rem;
+    color: var(--bg-primary);
+    text-align: center;
+    padding: 1.5rem 0;
+}
+
+#cart-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+#cart-container .cart-item {
+    width: 80%;
+    background-color: #f7f7f7;
+    border-radius: 1.5rem;
+    display: flex;
+    padding: 1rem 1.5rem;
+    gap: 2.5rem;
+    box-shadow: 0 1.6px 3.6px 0 rgb(0 0 0 / 13%), 0 0.3px 0.9px 0 rgb(0 0 0 / 11%);
+}
+
+#cart-container .cart-item img {
+    aspect-ratio: 2/3;
+    border-radius: 1rem;
+    object-fit: cover;
+}
+
+#cart-container .cart-item .item-details {
+    display: flex;
+    flex-basis: 100%;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--bg-primary);
+}
+
+.cart-item .item-details p {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.cart-item .item-details button {
+    font-size: 1.3rem;
+    font-weight: 600;
+    background-color: transparent;
+}
+
+.cart-item .item-details span {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #D4EBF8;
+}
+.cart-item .item-details button > img{
+    width: 1.5rem;
+}
+
+.cart-item .item-details .cartItem-info {
+    flex-basis: 35%;
+}
+
+.cart-item .item-details .cartItem-info h3 {
+    font-size: 1.25rem;
+}
+
+.cart-item .item-details .cartItem-info p {
+    font-size: 1rem;
+    color: var(--btn-primary);
+    font-weight: bold;
+}
+.order{
+    width: 100%;
+    background-color: var(--bg-secondary);
+    padding: 1.5rem 0;
+    margin: 0 auto;
+}
+.order > .wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.order > .wrapper h3{
+    font-size: 1.5rem;
+    padding: 5px 0;
+    font-weight: 500;
+}
+.order > .wrapper h3 > span{
+    font-weight: bold;
+    padding-left: 10px;
+}
+.order-container{
+    border-bottom: solid 2px var(--bg-primary);
+    padding-bottom: 5px;
+}
+.place-order{
+    padding-top: 5px;
+}
+.place-order p{
+    font-weight: bold;
+    font-style: italic;
+    color: var(--text-author);
+}
+.place-order button{
+    display: block;
+    background-color: var(--btn-primary);
+    color: var(--bg-primary);
+    font-size: 1.2rem;
+    padding: 10px 25px;
+    border-radius: 1.5rem;
+    margin:10px auto;
+}
