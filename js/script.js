@@ -1,15 +1,15 @@
-const apiKey = 'AIzaSyC49N1ngGnHoVJbZzjzZeyfsjeTCsB5Xi8'; // Replace with your API key
+const apiKey = 'AIzaSyC49N1ngGnHoVJbZzjzZeyfsjeTCsB5Xi8'; 
 
-// Function to fetch books by topic
+
 async function fetchBooksByTopic(topic) {
     let query;
 
     switch (topic) {
         case 'new':
-            query = 'published:2024&orderBy=newest'; // New books
+            query = 'published:2024&orderBy=newest'; 
             break;
         case 'best-sellers':
-            query = 'new+york+times+bestseller'; // Best sellers
+            query = 'new+york+times+bestseller'; 
             break;
         case 'books-of-the-week':
             query = 'notable+books+rating+2024&orderBy=relevance';
@@ -21,7 +21,7 @@ async function fetchBooksByTopic(topic) {
             query = 'subject:fiction&orderBy=relevance';
             break;
         default:
-            query = 'subject:books'; // Fallback to general books
+            query = 'subject:books'; 
     }
 
 
@@ -36,7 +36,6 @@ async function fetchBooksByTopic(topic) {
     }
 }
 
-// Function to display books in their respective sections
 function displayBooks(books, topic) {
     let container;
     switch (topic) {
@@ -161,11 +160,11 @@ function displayBooks(books, topic) {
     });
 }
 function handleSearch(event) {
-    event.preventDefault(); // Prevent page reload on form submission
+    event.preventDefault(); 
 
     const searchInput = document.getElementById('search-input').value.trim();
     if (searchInput) {
-        // Redirect to search results page with query parameter
+        
         window.location.href = `/pages/search-results.html?query=${encodeURIComponent(searchInput)}`;
     }
 }
@@ -174,7 +173,7 @@ function displayBooksOfTheWeek(books, topic) {
     container.innerHTML = '';
 
     let validBooks = books.filter(book => book.volumeInfo.imageLinks?.thumbnail);
-    let limitedBooks = validBooks.slice(0, 3); // Limit to exactly 3 books
+    let limitedBooks = validBooks.slice(0, 3); 
 
     limitedBooks.forEach(book => {
         const title = book.volumeInfo.title || 'No Title';

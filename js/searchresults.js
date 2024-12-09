@@ -1,10 +1,10 @@
 const apiKey = 'AIzaSyC49N1ngGnHoVJbZzjzZeyfsjeTCsB5Xi8';
 
-// Get the search query from the URL 
+
 const urlParams = new URLSearchParams(window.location.search);
 const searchQuery = urlParams.get('query');
 
-// Function to fetch search results
+
 async function fetchSearchResults(query) {
     const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}&maxResults=24`;
 
@@ -22,7 +22,7 @@ async function fetchSearchResults(query) {
     }
 }
 
-// Function to display search results
+
 function displaySearchResults(books) {
     const container = document.getElementById('search-results-container');
     container.innerHTML = ''; // Clear previous results
@@ -118,5 +118,5 @@ function displaySearchResults(books) {
     });
 }
 
-// Fetch search results on page load
+
 fetchSearchResults(searchQuery);

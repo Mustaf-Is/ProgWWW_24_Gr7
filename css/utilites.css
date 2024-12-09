@@ -160,13 +160,23 @@
 
 .favorite-item .item-details .action-buttons button:first-child {
     background-color: var(--btn-primary);
-    color: var(--bg-primary);
-    font-size: var(--btn-fsize);
-    font-weight: bold;
-    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 15px;
     border-radius: 1.5rem;
     margin: 10px 0;
     transition: all 0.4s ease;
+}
+
+.favorite-item .item-details .action-buttons button:first-child>img{
+    width: 32px;
+    height: 32px;
+}
+.favorite-item .item-details .action-buttons button:first-child > span{
+    color: var(--bg-primary);
+    font-size: var(--btn-fsize);
+    font-weight: bold;
 }
 
 .favorite-item .item-details .action-buttons button:first-child:hover {

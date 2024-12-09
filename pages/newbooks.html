@@ -12,12 +12,15 @@
     <div id="header-container"></div>
 
     <div class="wrapper">
+        <h3>New Books</h3>
         <div id="books-container" class="books"></div>
     </div>
 
-    <div id="footer-container"></div>
+
     <script src="../js/utilties.js"></script>
     <script src="../js/viewall.js"></script>
+
+    <div id="footer-container"></div>
     <script>
         async function loadHeader() {
             const headerContainer = document.getElementById('header-container');
@@ -26,12 +29,22 @@
                 const html = await response.text();
                 headerContainer.innerHTML = html;
 
-                // Reinitialize search functionality after header loads
+                
                 document.getElementById('search-form').addEventListener('submit', handleSearch);
+
+                const currentLink = document.querySelector('nav .newbooks');
+
+                const currentPath = window.location.pathname;
+
+                if (currentLink.getAttribute('href').includes(currentPath)) {
+                    currentLink.classList.add('active');
+                }
+
             } catch (error) {
                 console.error('Error loading header:', error);
             }
         }
+
         loadHeader();
 
         async function loadFooter() {
@@ -46,6 +59,7 @@
             }
         }
         loadFooter();
+
     </script>
 </body>
 

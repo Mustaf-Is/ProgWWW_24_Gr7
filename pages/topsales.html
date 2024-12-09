@@ -12,6 +12,7 @@
     <div id="header-container"></div>
 
     <div class="wrapper">
+        <h3>Top Sales</h3>
         <div id="books-container" class="books"></div>
     </div>
 
@@ -27,8 +28,16 @@
                 const html = await response.text();
                 headerContainer.innerHTML = html;
 
-                // Reinitialize search functionality after header loads
+                
                 document.getElementById('search-form').addEventListener('submit', handleSearch);
+
+                const currentLink = document.querySelector('nav .topsales');
+                const currentPath = window.location.pathname;
+
+                if (currentLink.getAttribute('href').includes(currentPath)) {
+                    currentLink.classList.add('active');
+                }
+
             } catch (error) {
                 console.error('Error loading header:', error);
             }
@@ -48,7 +57,6 @@
         }
         loadFooter();
     </script>
-
 
 </body>
 

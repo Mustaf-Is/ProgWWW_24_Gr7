@@ -10,6 +10,19 @@
     <title>Illyrian Books</title>
     <link rel="stylesheet" href="./css/home.css" />
     <link rel="stylesheet" href="./css/styles.css" />
+
+    <style>
+        .hidden {
+            opacity: 0;
+            transform: translateX(-90%);
+            transition: all 1s;
+        }
+
+        .show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
 </head>
 
 <body>
@@ -48,7 +61,6 @@
             <a href="#best-sellers">Bestsellers</a>
             <a href="#special-offers">Special Offers</a>
             <a href="#top-sales">Top Sales</a>
-            <a href="#genre">Genre</a>
         </div>
     </nav>
 
@@ -168,6 +180,24 @@
     </div>
 
     <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+
+        function initScrollAnimation() {
+            const elements = document.querySelectorAll('section');
+            elements.forEach((el) => {
+                el.classList.add('hidden');
+                observer.observe(el);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initScrollAnimation);
+
         async function loadFooter() {
             const footerContainer = document.getElementById('footer-container');
             try {

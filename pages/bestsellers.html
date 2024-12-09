@@ -14,9 +14,7 @@
      </div>
 
      <div class="wrapper">
-          <div class="tittle">
-
-          </div>
+          <h3>BestSellers</h3>
           <div id="books-container" class="books"></div>
      </div>
 
@@ -32,28 +30,37 @@
                     const html = await response.text();
                     headerContainer.innerHTML = html;
 
-                    // Reinitialize search functionality after header loads
+                    
                     document.getElementById('search-form').addEventListener('submit', handleSearch);
+
+                    const currentLink = document.querySelector('nav .bestsellers');
+                    const currentPath = window.location.pathname;
+
+                    if (currentLink.getAttribute('href').includes(currentPath)) {
+                         currentLink.classList.add('active');
+                    }
+
                } catch (error) {
                     console.error('Error loading header:', error);
                }
           }
           loadHeader();
 
-          async function loadFooter(){
+          async function loadFooter() {
                const footerContainer = document.getElementById('footer-container');
                try {
                     const response = await fetch('../components/footer.html');
-                    const html= await response.text();
+                    const html = await response.text();
                     footerContainer.innerHTML = html;
 
-               }catch (error){
+               } catch (error) {
                     console.error('Error loading footer:', error);
                }
           }
           loadFooter();
+
      </script>
-     
+
 </body>
 
 </html>

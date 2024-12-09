@@ -45,7 +45,7 @@
                     const html = await response.text();
                     headerContainer.innerHTML = html;
 
-                    // Reinitialize search functionality after header loads
+                    
                     document.getElementById('search-form').addEventListener('submit', handleSearch);
                } catch (error) {
                     console.error('Error loading header:', error);

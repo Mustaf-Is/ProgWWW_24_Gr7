@@ -1,4 +1,4 @@
-// Cart functions
+
 function getCartItems() {
     return JSON.parse(localStorage.getItem('cart')) || [];
 }
@@ -19,7 +19,7 @@ function addToCart(book) {
     return { success: false, message: 'Maximum quantity reached!' };
 }
 
-// Favorites functions
+
 function getFavorites() {
     return JSON.parse(localStorage.getItem('favorites')) || [];
 }
@@ -39,11 +39,10 @@ function toggleFavorite(book) {
     }
 }
 function handleSearch(event) {
-    event.preventDefault(); // Prevent page reload on form submission
+    event.preventDefault();
 
     const searchInput = document.getElementById('search-input').value.trim();
     if (searchInput) {
-        // Redirect to search results page with query parameter
         window.location.href = `/pages/search-results.html?query=${encodeURIComponent(searchInput)}`;
     }
 }
