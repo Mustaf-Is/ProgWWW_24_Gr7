@@ -93,6 +93,19 @@ async function fetchBookDetails() {
                     <p>Category:<span> ${categories}</span></p>
                 </div>
             </div>
+            <div class="media-container">
+                <h2>Product Preview</h2>
+                <div class="media-preview">
+                    <video width="100%" controls>
+                        <source src="../assets/media/Book Promotional Video Template.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <audio controls>
+                        <source src="../assets/media/audio-libri.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>    
+                </div>
+            </div>
         </div>
         `;
         fetchSimilarBooks(title);

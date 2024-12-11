@@ -166,28 +166,47 @@ header .top .container {
 
 header .top #search-form {
    width: 35%;
+   display: flex;
    position: relative;
 }
 
 header .top #search-form button {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-basis: 10%;
    margin: 0;
-   padding: 0 5px;
-   position: absolute;
+   padding: 0;
+   border-top-left-radius: 0;
+   border-bottom-left-radius: 0;
+   border-top-right-radius: 1.5rem;
+   border-bottom-right-radius: 1.5rem;
    background-color: var(--text-secondary);
-   right: 10px;
-   top: 7px;
+}
+
+header .top #search-form button>img {
+   width: 28px;
 }
 
 header input#search-input {
-   width: 100%;
+   flex-basis: 90%;
    height: 3rem;
    padding: 0 1rem;
-   border-radius: 1.5rem;
+   border-top-left-radius: 1.5rem;
+   border-bottom-left-radius: 1.5rem;
    border: none;
    outline: none;
    color: var(--text-primary);
    font-size: 1rem;
    font-weight: bold;
+}
+
+header input#search-input:-webkit-autofill,
+header input#search-input:-webkit-autofill:hover,
+header input#search-input:-webkit-autofill:focus {
+   -webkit-box-shadow: 0 0 0px 1000px white inset;
+   -webkit-text-fill-color: var(--text-primary);
+   transition: background-color 5000s ease-in-out 0s;
 }
 
 header input#search-input::placeholder {

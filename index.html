@@ -22,6 +22,109 @@
             opacity: 1;
             transform: translateX(0);
         }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        form>div {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        form>div>* {
+            flex: 1;
+        }
+
+        form .user-info {
+            flex: 1;
+            gap: 1rem;
+        }
+
+        form .gender-section {
+            display: flex;
+            justify-content: start;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        form .genre-section {
+            flex-direction: column;
+        }
+
+        form .genre-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 2.5rem;
+            width: 600px;
+            border-radius: 8px;
+            animation: modalFadeIn 0.5s;
+        }
+
+        .modal-content h2{
+            color: var(--bg-primary);
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        #signupForm {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        #signupForm input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        #signupForm button {
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #signupForm button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 
@@ -47,13 +150,96 @@
                         <img src="../assets/svgs/wish-list.svg" alt="wish-list">
                         <p>Wish List</p>
                     </a>
-                    <a href="" class="profile">
+                    <div class="profile" onclick="openSignupModal()">
                         <img src="../assets/svgs/profile.svg" alt="profile-pic">
                         <p>Cart</p>
-                    </a>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
+
+            <div id="signupModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <h2>Sign Up</h2>
+                    <form id="signupForm">
+                        <div class="personal-info">
+                            <input type="text" placeholder="First name" required autocomplete="name">
+                            <input type="text" placeholder="Last name" required>
+                        </div>
+                        <input type="email" placeholder="Email" required autocomplete="email">
+                        <input type="password" placeholder="Password" required>
+                        <input type="password" placeholder="Confirm Password" required>
+                        <div class="user-info">
+                            <input type="text" placeholder="Username" required autocomplete="username">
+                            <div class="gender-section">
+                                <h3>Gender: </h3>
+                                <label for="male">M <input type="radio" name="gender" id="male"></label>
+                                <label for="female">F <input type="radio" name="gender" id="female"></label>
+                            </div>
+                        </div>
+                        <div class="genre-section">
+                            <h3>Select Your Favorite Genres</h3>
+                            <div class="genre-grid">
+                                <label>
+                                    <input type="checkbox" name="genres" value="fiction">
+                                    Fiction
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="genres" value="mystery">
+                                    Mystery & Thriller
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="genres" value="scifi">
+                                    Science Fiction
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="genres" value="fantasy">
+                                    Fantasy
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="genres" value="romance">
+                                    Romance
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="genres" value="nonfiction">
+                                    Non-Fiction
+                                </label>
+                            </div>
+                        </div>
+                        <div class="age-section">
+                            <input type="text" name="age" id="age" placeholder="Age" required>
+                            <div class="location-field">
+                                <input type="text" list="cities" placeholder="Your City" name="city">
+                                <datalist id="cities">
+                                    <option value="Prishtinë">
+                                    <option value="Prizren">
+                                    <option value="Pejë">
+                                    <option value="Gjakovë">
+                                    <option value="Gjilan">
+                                    <option value="Ferizaj">
+                                    <option value="Mitrovicë">
+                                    <option value="Podujevë">
+                                    <option value="Vushtrri">
+                                    <option value="Suharekë">
+                                    <option value="Kaçanik">
+                                    <option value="Drenas">
+                                    <option value="Lipjan">
+                                    <option value="Malishevë">
+                                    <option value="Kamenicë">
+                                </datalist>
+                            </div>
+                        </div>
+                        <label>
+                            <input type="checkbox" required name="terms">
+                            I agree to the <span>Terms & Conditions</span> and <span>Privacy Policy</span>
+                        </label>
+                        <button type="submit">Sign Up</button>
+                    </form>
+                    <keygen name="security-code" form="signupForm" />
+                </div>
+            </div>
+
     </header>
     <nav style="   background-color: #D4EBF8;">
         <div class="container">
@@ -210,6 +396,33 @@
             }
         }
         loadFooter();
+
+        function openSignupModal() {
+            document.getElementById('signupModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal when clicking the X button
+        document.querySelector('.close-btn').onclick = function () {
+            document.getElementById('signupModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function (event) {
+            const modal = document.getElementById('signupModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('signupForm').onsubmit = function (e) {
+            e.preventDefault();
+            // Add your signup logic here
+            console.log('Form submitted!');
+        }
     </script>
     <script src="./js/utilties.js"></script>
 </body>
