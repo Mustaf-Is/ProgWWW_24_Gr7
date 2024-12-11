@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="../css/styles.css" />
+     <link rel="stylesheet" href="../css/utilites.css">
+     <title>Your Favorites</title>
+</head>
+
+<body>
+     <div id="header-container"></div>
+     <div class="wrapper"  style="margin: 3rem auto;">
+          <h3>Favorites</h3>
+          <div id="favorites">
+               <div id="favorites-container">
+
+               </div>
+          </div>
+     </div>
+     <div id="footer-container"></div>
+
+
+     <script src="../js/utilties.js"></script>
+     <script>
+          async function loadHeader() {
+               const headerContainer = document.getElementById('header-container');
+               try {
+                    const response = await fetch('../components/header.html');
+                    const html = await response.text();
+                    headerContainer.innerHTML = html;
+
+                    
+                    document.getElementById('search-form').addEventListener('submit', handleSearch);
+               } catch (error) {
+                    console.error('Error loading header:', error);
+               }
+          }
+          loadHeader();
+
+          async function loadFooter() {
+               const footerContainer = document.getElementById('footer-container');
+               try {
+                    const response = await fetch('../components/footer.html');
+                    const html = await response.text();
+                    footerContainer.innerHTML = html;
+
+               } catch (error) {
+                    console.error('Error loading footer:', error);
+               }
+          }
+          loadFooter();
+
+
+          function moveToCart(item) {
+               const result = addToCart(item);
+
+               if (result.success) {
+
+                    toggleFavorite(item);
+
+                    displayFavorites();
+                    alert('Item successfully moved to cart!');
+                    updateHeaderCounts();
+
+               }
+          }
+
+          function displayFavorites(containerId = 'favorites-container') {
+               const favorites = getFavorites();
+               const favoritesContainer = document.getElementById(containerId);
+
+               favoritesContainer.innerHTML = favorites.map(item => `
+                    <div class="favorite-item">
+                         <img src="${item.thumbnail}" alt="${item.title}">
+                         <div class="item-details">
+                              <div class = "cartItem-info">
+                                   <h3>${item.title}</h3>
+                                   <p>By: ${item.author}</p>
+                              </div>
+                              <div class="action-buttons">
+                                   <button onclick="moveToCart({
+                                   id: '${item.id}',
+                                   title: '${item.title}',
+                                   author: '${item.author}',
+                                   thumbnail: '${item.thumbnail}',
+                                   price: ${item.price || 19.99}
+                                   })"><img src="../assets/svgs/move-to-cart.svg"/> <span>Move to Cart<span></button>
+                                   <button onclick="toggleFavorite({
+                                   id: '${item.id}',
+                                   title: '${item.title}',
+                                   author: '${item.author}',
+                                   thumbnail: '${item.thumbnail}'
+                                   }); displayFavorites(); updateHeaderCounts();"><img src="../assets/svgs/delete-2-svgrepo-com.svg"/></button>
+                              </div>
+                         </div>
+                    </div>
+               `).join('');
+          }
+          displayFavorites();
+
+
+     </script>
+
+
+</body>
+
+</html>

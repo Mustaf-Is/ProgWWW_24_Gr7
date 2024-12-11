@@ -12,9 +12,13 @@
      <div id="header-container"></div>
 
      <div class="wrapper">
+          <h3>Special Offers</h3>
           <div id="books-container" class="books"></div>
      </div>
 
+     <div id="footer-container"></div>
+
+     <script src="../js/utilties.js"></script>
      <script src="../js/viewall.js"></script>
      <script>
           async function loadHeader() {
@@ -24,31 +28,36 @@
                     const html = await response.text();
                     headerContainer.innerHTML = html;
 
-                    // Reinitialize search functionality after header loads
+                    
                     document.getElementById('search-form').addEventListener('submit', handleSearch);
+
+                    const currentLink = document.querySelector('nav .specialoffers');
+                    const currentPath = window.location.pathname;
+
+                    if (currentLink.getAttribute('href').includes(currentPath)) {
+                         currentLink.classList.add('active');
+                    }
                } catch (error) {
                     console.error('Error loading header:', error);
                }
           }
           loadHeader();
 
-          async function loadFooter(){
+          async function loadFooter() {
                const footerContainer = document.getElementById('footer-container');
                try {
                     const response = await fetch('../components/footer.html');
-                    const html= await response.text();
+                    const html = await response.text();
                     footerContainer.innerHTML = html;
 
-               }catch (error){
+               } catch (error) {
                     console.error('Error loading footer:', error);
                }
           }
           loadFooter();
      </script>
 
-     <div id="footer-container">
 
-     </div>
 </body>
 
 </html>

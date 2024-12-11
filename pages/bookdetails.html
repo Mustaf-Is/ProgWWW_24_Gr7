@@ -22,6 +22,9 @@
         </div>
     </div>
 
+    <div id="footer-container"></div>
+
+    <script src="../js/utilties.js"></script>
     <script src="../js/bookdetails.js"></script>
     <script>
         async function loadHeader() {
@@ -31,7 +34,7 @@
                 const html = await response.text();
                 headerContainer.innerHTML = html;
 
-                // Reinitialize search functionality after header loads
+                
                 document.getElementById('search-form').addEventListener('submit', handleSearch);
             } catch (error) {
                 console.error('Error loading header:', error);
@@ -53,7 +56,7 @@
         loadFooter();
     </script>
 
-    <div id="footer-container"></div>
+
 </body>
 
 </html>

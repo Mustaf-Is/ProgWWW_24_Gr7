@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+    <title>Header Component</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+        
+    </style>
 </head>
 
 <body>
@@ -21,15 +24,15 @@
                     <button type="submit"><img src="../assets/svgs/search-btn.svg" alt="search button"></button>
                 </form>
                 <div class="top-menu">
-                    <a href="" class="cart-list">
+                    <a href="../pages/cart.html" class="cart-list">
                         <img src="../assets/svgs/cart.svg" alt="shooping-cart">
                         <p>Cart</p>
                     </a>
-                    <a href="" class="wish-list">
+                    <a href="../pages/favorites.html" class="wish-list">
                         <img src="../assets/svgs/wish-list.svg" alt="wish-list">
                         <p>Wish List</p>
                     </a>
-                    <a href="" class="profile">
+                    <div class="profile" onclick="openSignupModal()">
                         <img src="../assets/svgs/profile.svg" alt="profile-pic">
                         <p>Profile</p>
                     </a>
@@ -40,13 +43,29 @@
     <nav
         style="box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px">
         <div class="container">
-            <a href="../pages/newbooks.html">New Books</a>
-            <a href="../pages/bestsellers.html">Bestsellers</a>
-            <a href="..//pages/special-offers.html">Special Offers</a>
-            <a href="">Top Sales</a>
-            <a href="">Genre</a>
+            <a href="../pages/newbooks.html" class="newbooks">New Books</a>
+            <a href="../pages/bestsellers.html" class="bestsellers">Bestsellers</a>
+            <a href="../pages/special-offers.html" class="specialoffers">Special Offers</a>
+            <a href="../pages/topsales.html" class="topsales">Top Sales</a>
         </div>
     </nav>
-    </header>
+
+
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <input type="password" placeholder="Confirm Password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/utilties.js"></script> 
 </body>
+
 </html>

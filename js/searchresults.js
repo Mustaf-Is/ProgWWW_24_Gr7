@@ -1,10 +1,10 @@
 const apiKey = 'AIzaSyC49N1ngGnHoVJbZzjzZeyfsjeTCsB5Xi8';
 
-// Get the search query from the URL 
+
 const urlParams = new URLSearchParams(window.location.search);
 const searchQuery = urlParams.get('query');
 
-// Function to fetch search results
+
 async function fetchSearchResults(query) {
     const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}&maxResults=24`;
 
@@ -22,7 +22,7 @@ async function fetchSearchResults(query) {
     }
 }
 
-// Function to display search results
+
 function displaySearchResults(books) {
     const container = document.getElementById('search-results-container');
     container.innerHTML = ''; // Clear previous results
@@ -81,9 +81,42 @@ function displaySearchResults(books) {
             window.location.href = `bookdetails.html?id=${book.id}`;
         });
 
+        bookCard.querySelector('.cart button').addEventListener('click', () => {
+            const bookData = {
+                id: book.id,
+                title: title,
+                author: authors,
+                price: price,
+                thumbnail: thumbnail
+            };
+
+            const result = addToCart(bookData);
+            alert(result.message);
+        });
+
+        bookCard.querySelector('.favorite').addEventListener('click', (e) => {
+            const bookData = {
+                id: book.id,
+                title: title,
+                author: authors,
+                thumbnail: thumbnail
+            };
+
+            const result = toggleFavorite(bookData);
+            const favoriteBtn = e.currentTarget;
+
+            if (result.action === 'added') {
+                favoriteBtn.classList.add('active');
+                favoriteBtn.querySelector('img').style.filter = 'invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg)';
+            } else {
+                favoriteBtn.classList.remove('active');
+                favoriteBtn.querySelector('img').style.filter = 'none';
+            }
+        });
+
         container.appendChild(bookCard);
     });
 }
 
-// Fetch search results on page load
+
 fetchSearchResults(searchQuery);

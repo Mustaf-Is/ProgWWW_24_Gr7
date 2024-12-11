@@ -1,6 +1,5 @@
 const apiKey = 'AIzaSyCyjJG0UWPZQyeQcIf-nmveY7Etb2J3CV4';
 
-// Get the topic from the query string
 const page = window.location.pathname.split('/').pop();
 const topic = page.includes('newbooks') ? 'new' :
     page.includes('bestsellers') ? 'best-sellers'
@@ -9,17 +8,17 @@ const topic = page.includes('newbooks') ? 'new' :
                 : page.includes('topsales') ? 'top-sales'
                     : 'all-books';
 
-// Function to fetch all books for a specific topic
+
 async function fetchAllBooksByTopic(topic) {
 
     let query;
 
     switch (topic) {
         case 'new':
-            query = 'published:2024&orderBy=newest'; // New books
+            query = 'published:2024&orderBy=newest'; 
             break;
         case 'best-sellers':
-            query = 'new+york+times+bestseller'; // Best sellers
+            query = 'new+york+times+bestseller'; 
             break;
         case 'books-of-the-week':
             query = 'notable+books+rating+2024&orderBy=relevance';
@@ -31,7 +30,7 @@ async function fetchAllBooksByTopic(topic) {
             query = 'subject:fiction&orderBy=relevance';
             break;
         default:
-            query = 'subject:books';// Fallback to general books
+            query = 'subject:books';
     }
 
     const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}&maxResults=24`;
@@ -45,10 +44,9 @@ async function fetchAllBooksByTopic(topic) {
     }
 }
 
-// Function to display all books
 function displayAllBooks(books) {
     const container = document.getElementById('books-container');
-    container.innerHTML = ''; // Clear the container
+    container.innerHTML = ''; 
 
     books.forEach(book => {
         const title = book.volumeInfo.title || 'No Title';
@@ -104,6 +102,39 @@ function displayAllBooks(books) {
 
         bookCard.querySelector('.view-details').addEventListener('click', () => {
             window.location.href = `bookdetails.html?id=${book.id}`;
+        });
+
+        bookCard.querySelector('.cart button').addEventListener('click', () => {
+            const bookData = {
+                id: book.id,
+                title: title,
+                author: authors,
+                price: price,
+                thumbnail: thumbnail
+            };
+
+            const result = addToCart(bookData);
+            alert(result.message);
+        });
+
+        bookCard.querySelector('.favorite').addEventListener('click', (e) => {
+            const bookData = {
+                id: book.id,
+                title: title,
+                author: authors,
+                thumbnail: thumbnail
+            };
+
+            const result = toggleFavorite(bookData);
+            const favoriteBtn = e.currentTarget;
+
+            if (result.action === 'added') {
+                favoriteBtn.classList.add('active');
+                favoriteBtn.querySelector('img').style.filter = 'invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg)';
+            } else {
+                favoriteBtn.classList.remove('active');
+                favoriteBtn.querySelector('img').style.filter = 'none';
+            }
         });
 
         container.appendChild(bookCard);
