@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .draggable {
+            cursor: move;
+            position: absolute; 
+        }
+        
+        .return-button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            position: absolute;
+            top: 320px;
+            left: 50px;
+        }
+        .static-circles {
+            margin-left: 400px;
+        }
+    </style>
+    
+</head>
+<body>
+    <svg width="300" height="300" viewBox="-50 0 300 300" class="draggable" id="star">
+        <polygon points="100,10 130,90 220,90 150,140 180,220 100,170 20,220 50,140 -20,90 70,90"
+                 style="fill:#4CAF50;stroke:#2E7D32;stroke-width:2"/>
+        <circle cx="100" cy="115" r="30" 
+                style="fill:#81C784;stroke:#2E7D32;stroke-width:2"/>
+    </svg>
+
+    <svg width="400" height="400" class="static-circles">
+        <circle cx="150" cy="150" r="70" 
+                style="fill:#3F51B5;opacity:0.7"/>
+        <circle cx="190" cy="150" r="70" 
+                style="fill:#E91E63;opacity:0.7"/>
+        <circle cx="170" cy="190" r="70" 
+                style="fill:#FFC107;opacity:0.7"/>
+    </svg>
+    <button class="return-button" onclick="returnToOriginal()">Return to Original Position</button>
+
+    <br><br>
+
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let shelfGradient = ctx.createLinearGradient(0, 0, 0, 400);
+        shelfGradient.addColorStop(0, '#8B4513');
+        shelfGradient.addColorStop(1, '#A0522D');
+        ctx.fillStyle = shelfGradient;
+        ctx.fillRect(0, 0, 400, 400);
+
+        ctx.fillStyle = '#FF0000';
+        ctx.fillRect(50, 100, 40, 200);
+
+        ctx.fillStyle = '#0000FF';
+        ctx.fillRect(90, 120, 30, 180);
+        
+        ctx.fillStyle = '#008000';
+        ctx.fillRect(120, 90, 50, 210);
+
+        ctx.fillStyle = '#800080';
+        ctx.fillRect(170, 110, 35, 190);
+
+        ctx.save();
+        ctx.fillStyle = 'white';
+        ctx.font = '14px Arial';
+        ctx.translate(70, 250);
+        ctx.rotate(-Math.PI/2);
+        ctx.fillText('Fantasy', 0, 0);
+        
+        ctx.translate(-30, 85);
+        ctx.fillText('Mystery', 0, 0);
+        
+        ctx.translate(-20, 40);
+        ctx.fillText('Adventure', 0, 0);
+        
+        ctx.translate(-25, 45);
+        ctx.restore();
+
+        ctx.font = 'bold 24px Arial';
+        ctx.fillStyle = '#FFD700';
+        ctx.fillText('My Reading Collection', 80, 50);
+
+        const originalPosition = {
+            x: star.offsetLeft,
+            y: star.offsetTop
+        };
+
+        star.addEventListener('mousedown', dragStart);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', dragEnd);
+
+        function dragStart(e) {
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
+
+            if (e.target === star) {
+                isDragging = true;
+            }
+        }
+
+        function drag(e) {
+            if (isDragging) {
+                e.preventDefault();
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+
+                xOffset = currentX;
+                yOffset = currentY;
+
+                setTranslate(currentX, currentY, star);
+            }
+        }
+
+        function dragEnd() {
+            initialX = currentX;
+            initialY = currentY;
+            isDragging = false;
+        }
+
+        function setTranslate(xPos, yPos, el) {
+            el.style.transform = `translate(${xPos}px, ${yPos}px)`;
+        }
+
+        function returnToOriginal() {
+            xOffset = 0;
+            yOffset = 0;
+            currentX = 0;
+            currentY = 0;
+            setTranslate(0, 0, star);
+        }
+    </script>
+    
+</body>
+</html>
