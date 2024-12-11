@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,9 @@
     <style>
         .draggable {
             cursor: move;
-            position: absolute; 
+            position: absolute;
         }
-        
+
         .return-button {
             margin-top: 10px;
             padding: 5px 10px;
@@ -22,27 +23,31 @@
             top: 320px;
             left: 50px;
         }
+
         .static-circles {
             margin-left: 400px;
         }
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            margin: 20px;
+        }
     </style>
-    
+
 </head>
+
 <body>
     <svg width="300" height="300" viewBox="-50 0 300 300" class="draggable" id="star">
         <polygon points="100,10 130,90 220,90 150,140 180,220 100,170 20,220 50,140 -20,90 70,90"
-                 style="fill:#4CAF50;stroke:#2E7D32;stroke-width:2"/>
-        <circle cx="100" cy="115" r="30" 
-                style="fill:#81C784;stroke:#2E7D32;stroke-width:2"/>
+            style="fill:#4CAF50;stroke:#2E7D32;stroke-width:2" />
+        <circle cx="100" cy="115" r="30" style="fill:#81C784;stroke:#2E7D32;stroke-width:2" />
     </svg>
 
     <svg width="400" height="400" class="static-circles">
-        <circle cx="150" cy="150" r="70" 
-                style="fill:#3F51B5;opacity:0.7"/>
-        <circle cx="190" cy="150" r="70" 
-                style="fill:#E91E63;opacity:0.7"/>
-        <circle cx="170" cy="190" r="70" 
-                style="fill:#FFC107;opacity:0.7"/>
+        <circle cx="150" cy="150" r="70" style="fill:#3F51B5;opacity:0.7" />
+        <circle cx="190" cy="150" r="70" style="fill:#E91E63;opacity:0.7" />
+        <circle cx="170" cy="190" r="70" style="fill:#FFC107;opacity:0.7" />
     </svg>
     <button class="return-button" onclick="returnToOriginal()">Return to Original Position</button>
 
@@ -50,7 +55,59 @@
 
     <canvas id="myCanvas" width="400" height="400"></canvas>
 
+    <h1>jQuery Demo</h1>
+    <button id="hide-btn">Hide Box</button>
+    <button id="show-btn">Show Box</button>
+    <button id="fade-btn">Fade Box</button>
+    <button id="slide-btn">Slide Box</button>
+    <button id="animate-btn">Animate Box</button>
+
+    <div id="box"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        $(document).ready(function () {
+            const $box = $('#box');
+
+            $('#hide-btn').on('click', function () {
+                $box.hide();
+            });
+
+            $('#show-btn').on('click', function () {
+                $box.show();
+            });
+
+            $('#fade-btn').on('click', function () {
+                $box.fadeOut(500, function () { 
+                    alert('Box faded out!'); 
+                    $box.fadeIn(500); 
+                });
+            });
+
+            $('#slide-btn').on('click', function () {
+                $box.slideUp(500, function () { 
+                    alert('Box slid up!'); 
+                    $box.slideDown(500); 
+                });
+            });
+
+            $('#animate-btn').on('click', function () {
+                $box.animate({
+                    width: '200px',
+                    height: '200px',
+                    marginLeft: '50px'
+                }, 1000, function () { 
+                    alert('Box animation complete!'); 
+                    $box.animate({
+                        width: '100px',
+                        height: '100px',
+                        marginLeft: '20px'
+                    }, 1000);
+                });
+            });
+        });
+
+
         const canvas = document.getElementById('myCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -65,7 +122,7 @@
 
         ctx.fillStyle = '#0000FF';
         ctx.fillRect(90, 120, 30, 180);
-        
+
         ctx.fillStyle = '#008000';
         ctx.fillRect(120, 90, 50, 210);
 
@@ -76,15 +133,15 @@
         ctx.fillStyle = 'white';
         ctx.font = '14px Arial';
         ctx.translate(70, 250);
-        ctx.rotate(-Math.PI/2);
+        ctx.rotate(-Math.PI / 2);
         ctx.fillText('Fantasy', 0, 0);
-        
+
         ctx.translate(-30, 85);
         ctx.fillText('Mystery', 0, 0);
-        
+
         ctx.translate(-20, 40);
         ctx.fillText('Adventure', 0, 0);
-        
+
         ctx.translate(-25, 45);
         ctx.restore();
 
@@ -141,6 +198,7 @@
             setTranslate(0, 0, star);
         }
     </script>
-    
+
 </body>
+
 </html>
