@@ -22,109 +22,6 @@
             opacity: 1;
             transform: translateX(0);
         }
-
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        form>div {
-            display: flex;
-            justify-content: space-between;
-            gap: 1rem;
-        }
-
-        form>div>* {
-            flex: 1;
-        }
-
-        form .user-info {
-            flex: 1;
-            gap: 1rem;
-        }
-
-        form .gender-section {
-            display: flex;
-            justify-content: start;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        form .genre-section {
-            flex-direction: column;
-        }
-
-        form .genre-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-        }
-
-        .modal-content {
-            position: relative;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 2.5rem;
-            width: 600px;
-            border-radius: 8px;
-            animation: modalFadeIn 0.5s;
-        }
-
-        .modal-content h2{
-            color: var(--bg-primary);
-        }
-
-        .close-btn {
-            position: absolute;
-            right: 20px;
-            top: 10px;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        #signupForm {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        #signupForm input {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        #signupForm button {
-            padding: 12px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        #signupForm button:hover {
-            background-color: #0056b3;
-        }
     </style>
 </head>
 
@@ -152,7 +49,7 @@
                     </a>
                     <div class="profile" onclick="openSignupModal()">
                         <img src="../assets/svgs/profile.svg" alt="profile-pic">
-                        <p>Cart</p>
+                        <p><span></span></p>
                         </a>
                     </div>
                 </div>
@@ -417,14 +314,168 @@
             }
         }
 
-        // Handle form submission
-        document.getElementById('signupForm').onsubmit = function (e) {
+        const signupForm = document.getElementById('signupForm');
+        const firstName = document.querySelector('input[placeholder="First name"]');
+        const lastName = document.querySelector('input[placeholder="Last name"]');
+        const password = document.querySelector('input[placeholder="Password"]');
+        const confirmPassword = document.querySelector('input[placeholder="Confirm Password"]');
+        const username = document.querySelector('input[placeholder="Username"]');
+        const age = document.getElementById('age');
+
+        function createWarning(input, message) {
+            const warning = document.createElement('span');
+            warning.className = 'warning-message';
+            warning.style.color = 'red';
+            warning.style.fontSize = '12px';
+            warning.style.display = 'block';
+            warning.textContent = message;
+            input.parentNode.insertBefore(warning, input.nextSibling);
+        }
+
+        function removeWarning(input) {
+            const existingWarning = input.nextSibling;
+            if (existingWarning && existingWarning.className === 'warning-message') {
+                existingWarning.remove();
+            }
+        }
+
+        const patterns = {
+            names: /^[A-Za-z]+$/gi,
+            password: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/g,
+            username: /^[A-Z][A-Za-z0-9_]*$/g,
+            age: /^\d+$/g
+        };
+
+        function validateInput(input, pattern, message) {
+            removeWarning(input);
+            pattern.lastIndex = 0;
+            const value = input.value.trim();
+
+            if (value === '') {
+                createWarning(input, 'This field is required');
+                return false;
+            }
+
+            if (!pattern.test(value)) {
+                createWarning(input, message);
+                return false;
+            }
+            return true;
+        }
+
+        firstName.addEventListener('blur', () => {
+            validateInput(firstName, patterns.names, 'Please enter only letters');
+        });
+
+        lastName.addEventListener('blur', () => {
+            validateInput(lastName, patterns.names, 'Please enter only letters');
+        });
+
+        password.addEventListener('blur', () => {
+            validateInput(password, patterns.password,
+                'Password must start with uppercase, include a number and special character');
+        });
+
+        confirmPassword.addEventListener('blur', () => {
+            removeWarning(confirmPassword);
+            if (confirmPassword.value !== password.value) {
+                createWarning(confirmPassword, 'Passwords do not match');
+            }
+        });
+
+        username.addEventListener('blur', () => {
+            validateInput(username, patterns.username,
+                'Username must start with uppercase and contain only letters, numbers, and underscore');
+        });
+
+        age.addEventListener('blur', () => {
+            validateInput(age, patterns.age, 'Please enter numbers only');
+        });
+
+        const inputs = [firstName, lastName, password, confirmPassword, username, age];
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                removeWarning(input);
+            });
+        });
+
+
+        const currentUser = localStorage.getItem('currentUser');
+        if (currentUser) {
+            const profileText = document.querySelector('.profile p > span');
+            profileText.textContent = currentUser;
+
+            const profileDiv = document.querySelector('.profile');
+        }
+        else {
+            const profileText = document.querySelector('.profile p > span');
+            profileText.textContent = "User";
+        }
+
+
+        signupForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            // Add your signup logic here
-            console.log('Form submitted!');
+            let isValid = true;
+
+            if (!validateInput(firstName, patterns.names, 'Please enter only letters')) {
+                isValid = false;
+            }
+
+            if (!validateInput(lastName, patterns.names, 'Please enter only letters')) {
+                isValid = false;
+            }
+
+            if (!validateInput(password, patterns.password,
+                'Password must start with uppercase, include a number and special character')) {
+                isValid = false;
+            }
+
+            if (confirmPassword.value !== password.value) {
+                isValid = false;
+                createWarning(confirmPassword, 'Passwords do not match');
+            }
+
+            if (!validateInput(username, patterns.username,
+                'Username must start with uppercase and contain only letters, numbers, and underscore')) {
+                isValid = false;
+            }
+
+            if (!validateInput(age, patterns.age, 'Please enter numbers only')) {
+                isValid = false;
+            }
+
+            if (!isValid) {
+                e.preventDefault();
+            }
+
+            if (isValid) {
+                localStorage.setItem('currentUser', username.value);
+
+                alert(`Welcome to Illyrian Books, ${username.value}!`);
+
+                updateProfileDisplay();
+
+                document.getElementById('signupModal').style.display = 'none';
+                document.body.style.overflow = 'auto';
+
+                signupForm.reset();
+
+            }
+        });
+
+        function updateProfileDisplay() {
+            const profileText = document.querySelector('.profile p > span');
+            const currentUser = localStorage.getItem('currentUser');
+
+            if (currentUser) {
+                profileText.textContent = currentUser;
+            } else {
+                profileText.textContent = 'User';
+            }
         }
     </script>
     <script src="./js/utilties.js"></script>
+    <script src="./js/upButton.js"></script>
 </body>
 
 </html>

@@ -75,6 +75,7 @@
 #book-details .book-info .cart button:first-child{
     background-color: var(--btn-primary);
     color: var(--text-secondary);
+    padding: 12px 27px;
 }
 
 #book-details .book-info .cart button:first-child:hover{

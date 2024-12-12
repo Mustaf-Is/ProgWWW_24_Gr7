@@ -34,8 +34,183 @@
                 const html = await response.text();
                 headerContainer.innerHTML = html;
 
-                
+
                 document.getElementById('search-form').addEventListener('submit', handleSearch);
+
+                document.querySelector('.close-btn').onclick = function () {
+                    document.getElementById('signupModal').style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+
+                window.onclick = function (event) {
+                    const modal = document.getElementById('signupModal');
+                    if (event.target == modal) {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                }
+
+                const signupForm = document.getElementById('signupForm');
+                const firstName = document.querySelector('input[placeholder="First name"]');
+                const lastName = document.querySelector('input[placeholder="Last name"]');
+                const password = document.querySelector('input[placeholder="Password"]');
+                const confirmPassword = document.querySelector('input[placeholder="Confirm Password"]');
+                const username = document.querySelector('input[placeholder="Username"]');
+                const age = document.getElementById('age');
+
+                function createWarning(input, message) {
+                    const warning = document.createElement('span');
+                    warning.className = 'warning-message';
+                    warning.style.color = 'red';
+                    warning.style.fontSize = '12px';
+                    warning.style.display = 'block';
+                    warning.textContent = message;
+                    input.parentNode.insertBefore(warning, input.nextSibling);
+                }
+
+                function removeWarning(input) {
+                    const existingWarning = input.nextSibling;
+                    if (existingWarning && existingWarning.className === 'warning-message') {
+                        existingWarning.remove();
+                    }
+                }
+
+                const patterns = {
+                    names: /^[A-Za-z]+$/gi,
+                    password: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/g,
+                    username: /^[A-Z][A-Za-z0-9_]*$/g,
+                    age: /^\d+$/g
+                };
+
+                function validateInput(input, pattern, message) {
+                    removeWarning(input);
+                    pattern.lastIndex = 0;
+                    const value = input.value.trim();
+
+                    if (value === '') {
+                        createWarning(input, 'This field is required');
+                        return false;
+                    }
+
+                    if (!pattern.test(value)) {
+                        createWarning(input, message);
+                        return false;
+                    }
+                    return true;
+                }
+
+                firstName.addEventListener('blur', () => {
+                    validateInput(firstName, patterns.names, 'Please enter only letters');
+                });
+
+                lastName.addEventListener('blur', () => {
+                    validateInput(lastName, patterns.names, 'Please enter only letters');
+                });
+
+                password.addEventListener('blur', () => {
+                    validateInput(password, patterns.password,
+                        'Password must start with uppercase, include a number and special character');
+                });
+
+                confirmPassword.addEventListener('blur', () => {
+                    removeWarning(confirmPassword);
+                    if (confirmPassword.value !== password.value) {
+                        createWarning(confirmPassword, 'Passwords do not match');
+                    }
+                });
+
+                username.addEventListener('blur', () => {
+                    validateInput(username, patterns.username,
+                        'Username must start with uppercase and contain only letters, numbers, and underscore');
+                });
+
+                age.addEventListener('blur', () => {
+                    validateInput(age, patterns.age, 'Please enter numbers only');
+                });
+
+                const inputs = [firstName, lastName, password, confirmPassword, username, age];
+                inputs.forEach(input => {
+                    input.addEventListener('focus', () => {
+                        removeWarning(input);
+                    });
+                });
+
+
+                const currentUser = localStorage.getItem('currentUser');
+                if (currentUser) {
+                    const profileText = document.querySelector('.profile p > span');
+                    profileText.textContent = currentUser;
+
+                    const profileDiv = document.querySelector('.profile');
+                    profileDiv.onclick = null;
+                }
+                else {
+                    const profileText = document.querySelector('.profile p > span');
+                    profileText.textContent = "User";
+                }
+
+
+                signupForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    let isValid = true;
+
+                    if (!validateInput(firstName, patterns.names, 'Please enter only letters')) {
+                        isValid = false;
+                    }
+
+                    if (!validateInput(lastName, patterns.names, 'Please enter only letters')) {
+                        isValid = false;
+                    }
+
+                    if (!validateInput(password, patterns.password,
+                        'Password must start with uppercase, include a number and special character')) {
+                        isValid = false;
+                    }
+
+                    if (confirmPassword.value !== password.value) {
+                        isValid = false;
+                        createWarning(confirmPassword, 'Passwords do not match');
+                    }
+
+                    if (!validateInput(username, patterns.username,
+                        'Username must start with uppercase and contain only letters, numbers, and underscore')) {
+                        isValid = false;
+                    }
+
+                    if (!validateInput(age, patterns.age, 'Please enter numbers only')) {
+                        isValid = false;
+                    }
+
+                    if (!isValid) {
+                        e.preventDefault();
+                    }
+
+                    if (isValid) {
+                        localStorage.setItem('currentUser', username.value);
+
+                        alert(`Welcome to Illyrian Books, ${username.value}!`);
+
+                        updateProfileDisplay();
+
+                        document.getElementById('signupModal').style.display = 'none';
+                        document.body.style.overflow = 'auto';
+
+                        signupForm.reset();
+
+                    }
+                });
+
+                function updateProfileDisplay() {
+                    const profileText = document.querySelector('.profile p > span');
+                    const currentUser = localStorage.getItem('currentUser');
+
+                    if (currentUser) {
+                        profileText.textContent = currentUser;
+                    } else {
+                        profileText.textContent = 'User';
+                    }
+                }
+
             } catch (error) {
                 console.error('Error loading header:', error);
             }
@@ -54,7 +229,13 @@
             }
         }
         loadFooter();
+
+        function openSignupModal() {
+            document.getElementById('signupModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
     </script>
+    <script src="../js/upButton.js"></script>
 
 
 </body>

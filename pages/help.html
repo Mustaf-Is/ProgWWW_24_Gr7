@@ -9,6 +9,7 @@
         .draggable {
             cursor: move;
             position: absolute;
+            top: 200px;
         }
 
         .return-button {
@@ -19,51 +20,113 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            position: absolute;
-            top: 320px;
-            left: 50px;
         }
 
         .static-circles {
             margin-left: 400px;
         }
+
         #box {
             width: 100px;
             height: 100px;
-            background-color: blue;
-            margin: 20px;
+            background-color: var(--btn-primary);
+            margin: 30px;
+        }
+
+        @font-face {
+            font-family: 'Assistant';
+            src: url('../assets/fonts/Assistant-Bold.woff2') format('woff2'),
+                url('../assets/fonts/Assistant-Bold.woff') format('woff');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Assistant';
+            src: url('../assets/fonts/Assistant-Regular.woff2') format('woff2'),
+                url('../assets/fonts/Assistant-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Assistant';
+            src: url('../assets/fonts/Assistant-Medium.woff2') format('woff2'),
+                url('../assets/fonts/Assistant-Medium.woff') format('woff');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Assistant';
+            src: url('../assets/fonts/Assistant-Light.woff2') format('woff2'),
+                url('../assets/fonts/Assistant-Light.woff') format('woff');
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Assistant', sans-serif;
+        }
+
+        .wrapper-about {
+            width: 85%;
+            margin: 2rem auto;
+        }
+
+        ol {
+            list-style-type: decimal !important;
+            margin-left: 40px;
+        }
+
+        ul {
+            list-style-type: disc !important;
+            margin-left: 40px;
+        }
+
+        dd {
+            margin-left: 40px;
+        }
+
+        .wrapper {
+            width: 85%;
+            margin: auto;
         }
     </style>
 
 </head>
 
 <body>
-    <svg width="300" height="300" viewBox="-50 0 300 300" class="draggable" id="star">
-        <polygon points="100,10 130,90 220,90 150,140 180,220 100,170 20,220 50,140 -20,90 70,90"
-            style="fill:#4CAF50;stroke:#2E7D32;stroke-width:2" />
-        <circle cx="100" cy="115" r="30" style="fill:#81C784;stroke:#2E7D32;stroke-width:2" />
-    </svg>
+    <div id="header-container"></div>
+    <div class="wrapper">
+        <svg width="300" height="300" viewBox="-50 0 300 300" class="draggable" id="star">
+            <polygon points="100,10 130,90 220,90 150,140 180,220 100,170 20,220 50,140 -20,90 70,90"
+                style="fill:#4CAF50;stroke:#2E7D32;stroke-width:2" />
+            <circle cx="100" cy="115" r="30" style="fill:#81C784;stroke:#2E7D32;stroke-width:2" />
+        </svg>
 
-    <svg width="400" height="400" class="static-circles">
-        <circle cx="150" cy="150" r="70" style="fill:#3F51B5;opacity:0.7" />
-        <circle cx="190" cy="150" r="70" style="fill:#E91E63;opacity:0.7" />
-        <circle cx="170" cy="190" r="70" style="fill:#FFC107;opacity:0.7" />
-    </svg>
-    <button class="return-button" onclick="returnToOriginal()">Return to Original Position</button>
+        <svg width="400" height="400" class="static-circles">
+            <circle cx="150" cy="150" r="70" style="fill:#3F51B5;opacity:0.7" />
+            <circle cx="190" cy="150" r="70" style="fill:#E91E63;opacity:0.7" />
+            <circle cx="170" cy="190" r="70" style="fill:#FFC107;opacity:0.7" />
+        </svg>
+        <button class="return-button" onclick="returnToOriginal()">Return to Original Position</button>
 
-    <br><br>
+        <br><br>
 
-    <canvas id="myCanvas" width="400" height="400"></canvas>
+        <canvas id="myCanvas" width="400" height="400"></canvas>
 
-    <h1>jQuery Demo</h1>
-    <button id="hide-btn">Hide Box</button>
-    <button id="show-btn">Show Box</button>
-    <button id="fade-btn">Fade Box</button>
-    <button id="slide-btn">Slide Box</button>
-    <button id="animate-btn">Animate Box</button>
+        <h1>jQuery Demo</h1>
+        <button id="hide-btn">Hide Box</button>
+        <button id="show-btn">Show Box</button>
+        <button id="fade-btn">Fade Box</button>
+        <button id="slide-btn">Slide Box</button>
+        <button id="animate-btn">Animate Box</button>
 
-    <div id="box"></div>
+        <div id="box"></div>
+    </div>
 
+    <script src="../js/utilties.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -78,16 +141,16 @@
             });
 
             $('#fade-btn').on('click', function () {
-                $box.fadeOut(500, function () { 
-                    alert('Box faded out!'); 
-                    $box.fadeIn(500); 
+                $box.fadeOut(500, function () {
+                    alert('Box faded out!');
+                    $box.fadeIn(500);
                 });
             });
 
             $('#slide-btn').on('click', function () {
-                $box.slideUp(500, function () { 
-                    alert('Box slid up!'); 
-                    $box.slideDown(500); 
+                $box.slideUp(500, function () {
+                    alert('Box slid up!');
+                    $box.slideDown(500);
                 });
             });
 
@@ -96,8 +159,8 @@
                     width: '200px',
                     height: '200px',
                     marginLeft: '50px'
-                }, 1000, function () { 
-                    alert('Box animation complete!'); 
+                }, 1000, function () {
+                    alert('Box animation complete!');
                     $box.animate({
                         width: '100px',
                         height: '100px',
@@ -197,7 +260,225 @@
             currentY = 0;
             setTranslate(0, 0, star);
         }
+
+        async function loadHeader() {
+            const headerContainer = document.getElementById('header-container');
+            try {
+                const response = await fetch('../components/header.html');
+                const html = await response.text();
+                headerContainer.innerHTML = html;
+
+
+                document.getElementById('search-form').addEventListener('submit', handleSearch);
+
+                const currentLink = document.querySelector('nav .bestsellers');
+                const currentPath = window.location.pathname;
+
+                if (currentLink.getAttribute('href').includes(currentPath)) {
+                    currentLink.classList.add('active');
+                }
+
+                document.querySelector('.close-btn').onclick = function () {
+                    document.getElementById('signupModal').style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+
+                window.onclick = function (event) {
+                    const modal = document.getElementById('signupModal');
+                    if (event.target == modal) {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                }
+
+                const signupForm = document.getElementById('signupForm');
+                const firstName = document.querySelector('input[placeholder="First name"]');
+                const lastName = document.querySelector('input[placeholder="Last name"]');
+                const password = document.querySelector('input[placeholder="Password"]');
+                const confirmPassword = document.querySelector('input[placeholder="Confirm Password"]');
+                const username = document.querySelector('input[placeholder="Username"]');
+                const age = document.getElementById('age');
+
+                function createWarning(input, message) {
+                    const warning = document.createElement('span');
+                    warning.className = 'warning-message';
+                    warning.style.color = 'red';
+                    warning.style.fontSize = '12px';
+                    warning.style.display = 'block';
+                    warning.textContent = message;
+                    input.parentNode.insertBefore(warning, input.nextSibling);
+                }
+
+                function removeWarning(input) {
+                    const existingWarning = input.nextSibling;
+                    if (existingWarning && existingWarning.className === 'warning-message') {
+                        existingWarning.remove();
+                    }
+                }
+
+                const patterns = {
+                    names: /^[A-Za-z]+$/gi,
+                    password: /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/g,
+                    username: /^[A-Z][A-Za-z0-9_]*$/g,
+                    age: /^\d+$/g
+                };
+
+                function validateInput(input, pattern, message) {
+                    removeWarning(input);
+                    pattern.lastIndex = 0;
+                    const value = input.value.trim();
+
+                    if (value === '') {
+                        createWarning(input, 'This field is required');
+                        return false;
+                    }
+
+                    if (!pattern.test(value)) {
+                        createWarning(input, message);
+                        return false;
+                    }
+                    return true;
+                }
+
+                firstName.addEventListener('blur', () => {
+                    validateInput(firstName, patterns.names, 'Please enter only letters');
+                });
+
+                lastName.addEventListener('blur', () => {
+                    validateInput(lastName, patterns.names, 'Please enter only letters');
+                });
+
+                password.addEventListener('blur', () => {
+                    validateInput(password, patterns.password,
+                        'Password must start with uppercase, include a number and special character');
+                });
+
+                confirmPassword.addEventListener('blur', () => {
+                    removeWarning(confirmPassword);
+                    if (confirmPassword.value !== password.value) {
+                        createWarning(confirmPassword, 'Passwords do not match');
+                    }
+                });
+
+                username.addEventListener('blur', () => {
+                    validateInput(username, patterns.username,
+                        'Username must start with uppercase and contain only letters, numbers, and underscore');
+                });
+
+                age.addEventListener('blur', () => {
+                    validateInput(age, patterns.age, 'Please enter numbers only');
+                });
+
+                const inputs = [firstName, lastName, password, confirmPassword, username, age];
+                inputs.forEach(input => {
+                    input.addEventListener('focus', () => {
+                        removeWarning(input);
+                    });
+                });
+
+
+                const currentUser = localStorage.getItem('currentUser');
+                if (currentUser) {
+                    const profileText = document.querySelector('.profile p > span');
+                    profileText.textContent = currentUser;
+
+                    const profileDiv = document.querySelector('.profile');
+                    profileDiv.onclick = null;
+                }
+                else {
+                    const profileText = document.querySelector('.profile p > span');
+                    profileText.textContent = "User";
+                }
+
+
+                signupForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    let isValid = true;
+
+                    if (!validateInput(firstName, patterns.names, 'Please enter only letters')) {
+                        isValid = false;
+                    }
+
+                    if (!validateInput(lastName, patterns.names, 'Please enter only letters')) {
+                        isValid = false;
+                    }
+
+                    if (!validateInput(password, patterns.password,
+                        'Password must start with uppercase, include a number and special character')) {
+                        isValid = false;
+                    }
+
+                    if (confirmPassword.value !== password.value) {
+                        isValid = false;
+                        createWarning(confirmPassword, 'Passwords do not match');
+                    }
+
+                    if (!validateInput(username, patterns.username,
+                        'Username must start with uppercase and contain only letters, numbers, and underscore')) {
+                        isValid = false;
+                    }
+
+                    if (!validateInput(age, patterns.age, 'Please enter numbers only')) {
+                        isValid = false;
+                    }
+
+                    if (!isValid) {
+                        e.preventDefault();
+                    }
+
+                    if (isValid) {
+                        localStorage.setItem('currentUser', username.value);
+
+                        alert(`Welcome to Illyrian Books, ${username.value}!`);
+
+                        updateProfileDisplay();
+
+                        document.getElementById('signupModal').style.display = 'none';
+                        document.body.style.overflow = 'auto';
+
+                        signupForm.reset();
+
+                    }
+                });
+
+                function updateProfileDisplay() {
+                    const profileText = document.querySelector('.profile p > span');
+                    const currentUser = localStorage.getItem('currentUser');
+
+                    if (currentUser) {
+                        profileText.textContent = currentUser;
+                    } else {
+                        profileText.textContent = 'User';
+                    }
+                }
+
+
+            } catch (error) {
+                console.error('Error loading header:', error);
+            }
+        }
+        loadHeader();
+
+        async function loadFooter() {
+            const footerContainer = document.getElementById('footer-container');
+            try {
+                const response = await fetch('../components/footer.html');
+                const html = await response.text();
+                footerContainer.innerHTML = html;
+
+            } catch (error) {
+                console.error('Error loading footer:', error);
+            }
+        }
+        loadFooter();
+
+
+        function openSignupModal() {
+            document.getElementById('signupModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
     </script>
+    <script src="../js/upButton.js"></script>
 
 </body>
 
