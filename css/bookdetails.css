@@ -172,3 +172,72 @@ audio::-webkit-media-controls-time-remaining-display, audio::-webkit-media-contr
     color: var(--bg-primary);
     text-align: center;
 }
+
+@media (max-width: 900px) {
+    #book-details {
+        padding: 3rem 0;
+    }
+
+    #book-details .details-container {
+        align-items: flex-start;
+    }
+
+    #book-details .details-container .img-wrapper {
+        flex-basis: 38%;
+    }
+
+    .img-wrapper img {
+        width: min(100%, 250px);
+    }
+
+    #product-details > .wrapper {
+        gap: 2rem;
+    }
+
+    #product-details .media-container video {
+        width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    #book-details {
+        padding: 2rem 0;
+    }
+
+    #book-details .details-container,
+    #product-details > .wrapper {
+        flex-direction: column;
+    }
+
+    #book-details .details-container .img-wrapper,
+    #book-details .details-container .book-info,
+    #product-details > .wrapper > * {
+        width: 100%;
+    }
+
+    .img-wrapper img {
+        width: min(60%, 240px);
+    }
+
+    #book-details .book-info .cart {
+        flex-wrap: wrap;
+    }
+
+    #product-details .product-container,
+    #product-details .media-container {
+        align-items: stretch;
+    }
+
+    #product-details h2 {
+        font-size: 1.65rem;
+        text-align: center;
+    }
+
+    #product-details .media-container audio {
+        width: 100%;
+    }
+
+    #similar-books {
+        margin: 3rem 0;
+    }
+}

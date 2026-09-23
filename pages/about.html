@@ -61,6 +61,40 @@
         dd {
             margin-left: 40px;
         }
+
+        table {
+            max-width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: .45rem;
+        }
+
+        @media (max-width: 640px) {
+            .wrapper-about {
+                width: calc(100% - 2rem);
+            }
+
+            .wrapper-about h1 {
+                font-size: 1.65rem;
+            }
+
+            .wrapper-about table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .wrapper-about ol,
+            .wrapper-about ul,
+            .wrapper-about dd {
+                margin-left: 1.25rem;
+                padding-left: .75rem;
+            }
+        }
     </style>
 </head>
 

@@ -100,51 +100,12 @@ button:hover {
 }
 
 
-#hero ul.typing-text {
-     height: 50px;
-     line-height: 50px;
+#hero .container p.hero-quote {
+     width: 100%;
      padding: 0;
-     overflow: hidden;
-}
-
-@keyframes slide {
-     100% {
-          top: -220px;
-     }
-}
-
-#hero ul.typing-text li {
-     display: inline-block;
      font-size: 30px;
      font-weight: bold;
-     position: relative;
-     top: 0;
      color: var(--bg-primary);
-     animation: slide 20s steps(4) infinite;
-}
-
-
-#hero ul.typing-text li::after {
-     content: '';
-     position: absolute;
-     left: 0;
-     width: 100%;
-     height: 100%;
-     background-color: #D4EBF8;
-     border-left: solid 2px var(--bg-primary);
-     animation: typing 5s steps(50) infinite;
-}
-
-@keyframes typing {
-
-     40%,
-     60% {
-          left: calc(100% + 30px);
-     }
-
-     100% {
-          left: 0;
-     }
 }
 
 #hero h1>span {
@@ -326,4 +287,152 @@ button:hover {
 #books-of-the-week .container .books-description > p{
      font-size: 1.25rem;
      font-weight: 500;
+}
+
+/* Responsive home page */
+@media (max-width: 1200px) {
+     section .books {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+     }
+
+     #hero .container {
+          padding-left: 2rem;
+     }
+}
+
+@media (max-width: 900px) {
+     section {
+          margin: 4rem 0;
+     }
+
+     section .books {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+     }
+
+     #hero {
+          height: auto;
+          min-height: calc(100dvh - 12rem);
+          padding-bottom: 2rem;
+     }
+
+     #hero main {
+          height: auto;
+          min-height: 28rem;
+          align-items: center;
+     }
+
+     #hero .container {
+          width: 62%;
+          padding-left: 1rem;
+     }
+
+     #hero .image-container {
+          width: 38%;
+     }
+
+     #hero .image-container img {
+          position: static;
+     }
+
+     #books-of-the-week .container {
+          flex-direction: column;
+     }
+
+     #books-of-the-week .container .books-description {
+          text-align: center;
+          max-width: 48rem;
+     }
+}
+
+@media (max-width: 640px) {
+     section {
+          margin: 3rem 0;
+     }
+
+     section .section-caption {
+          padding: 1.5rem 0;
+          align-items: baseline;
+          gap: 1rem;
+     }
+
+     section .books {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+     }
+
+     #hero {
+          min-height: 0;
+     }
+
+     #hero>img {
+          display: none;
+     }
+
+     #hero h1 {
+          padding: 1.5rem 1rem 0.5rem;
+     }
+
+     #hero main {
+          min-height: 0;
+          padding: 1rem;
+     }
+
+     #hero .container {
+          width: 100%;
+          padding: 0;
+          text-align: center;
+     }
+
+     #hero .container p {
+          width: 100%;
+     }
+
+     #hero .container p.hero-quote {
+          font-size: 1.35rem;
+          line-height: 1.3;
+     }
+
+     #hero .image-container {
+          display: none;
+     }
+
+     .container .see-more {
+          justify-content: center;
+          flex-wrap: wrap;
+     }
+
+     #books-of-the-week {
+          padding: 2rem 0;
+     }
+
+     #books-of-the-week .container .books {
+          width: 100%;
+          max-width: 25rem;
+          padding: 1rem 0;
+     }
+
+     #books-of-the-week .container .books .book-card {
+          width: 33.333%;
+     }
+}
+
+@media (max-width: 420px) {
+     section .books {
+          grid-template-columns: minmax(0, 1fr);
+          width: min(100%, 280px);
+          margin-inline: auto;
+     }
+
+     #books-of-the-week .container .books {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+     }
+
+     #books-of-the-week .container .books .book-card {
+          width: auto;
+     }
+
+     #books-of-the-week .container .books:hover>.book-card:nth-child(1),
+     #books-of-the-week .container .books:hover>.book-card:nth-child(3) {
+          transform: none;
+     }
 }

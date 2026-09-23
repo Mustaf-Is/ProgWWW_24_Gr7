@@ -92,6 +92,36 @@
             width: 85%;
             margin: auto;
         }
+
+        canvas,
+        .static-circles,
+        .draggable {
+            max-width: 100%;
+        }
+
+        @media (max-width: 640px) {
+            .wrapper {
+                width: calc(100% - 2rem);
+                overflow: hidden;
+            }
+
+            .static-circles {
+                margin-left: 0;
+                width: 100%;
+                height: auto;
+            }
+
+            .draggable {
+                position: static;
+                width: 100%;
+                height: auto;
+            }
+
+            #myCanvas {
+                width: 100%;
+                height: auto;
+            }
+        }
     </style>
 
 </head>

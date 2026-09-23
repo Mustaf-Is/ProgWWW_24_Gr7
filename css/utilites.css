@@ -189,3 +189,97 @@
     box-shadow: 0 0 10px 0 #00000030;
     transition: all 0.05s ease;
 }
+
+@media (max-width: 900px) {
+    #cart-container .cart-item,
+    #favorites-container .favorite-item {
+        width: 100%;
+        gap: 1.5rem;
+    }
+
+    #cart-container .cart-item > img,
+    #favorites-container .favorite-item > img {
+        width: 110px;
+        flex: 0 0 110px;
+    }
+
+    #cart-container .cart-item .item-details {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        gap: 1rem;
+    }
+
+    .cart-item .item-details .cartItem-info {
+        grid-column: 1 / -1;
+    }
+
+    .favorite-item .item-details {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 640px) {
+    #cart-container .cart-item,
+    #favorites-container .favorite-item {
+        align-items: flex-start;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    #cart-container .cart-item > img,
+    #favorites-container .favorite-item > img {
+        width: 85px;
+        flex-basis: 85px;
+    }
+
+    #cart-container .cart-item .item-details {
+        grid-template-columns: 1fr auto;
+        align-items: center;
+    }
+
+    .cart-item .item-details > p:first-of-type {
+        display: none;
+    }
+
+    .favorite-item .item-details {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .favorite-item .item-details .cartItem-info,
+    .favorite-item .item-details .action-buttons {
+        flex-basis: auto;
+        width: 100%;
+    }
+
+    .favorite-item .item-details .action-buttons {
+        flex-wrap: wrap;
+    }
+
+    .favorite-item .item-details .action-buttons button:first-child {
+        margin: 0;
+    }
+
+    .order {
+        margin: 3rem auto;
+    }
+}
+
+@media (max-width: 420px) {
+    #cart-container .cart-item,
+    #favorites-container .favorite-item {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #cart-container .cart-item > img,
+    #favorites-container .favorite-item > img {
+        width: min(45%, 120px);
+        flex-basis: auto;
+    }
+
+    #cart-container .cart-item .item-details,
+    .favorite-item .item-details {
+        width: 100%;
+    }
+}
